@@ -1,3 +1,5 @@
+<img src="assets/allychat.png" alt="Alley Cat" width="200"/>
+
 # Chat With AI Alliance Website
 
 This example will show how to crawl a website, process HTML files and query them using RAG.
