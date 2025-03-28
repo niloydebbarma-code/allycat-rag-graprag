@@ -1,0 +1,14 @@
+input*/
+output*/
+*.out*
+
+.env
+
+*.db
+*.db.lock
+
+## profiling outputs
+*.svg
+*.speed
+
+__pycache__
