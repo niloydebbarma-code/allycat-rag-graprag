@@ -123,7 +123,9 @@ docker  login
 
 # tag the image to match dockerhub account
 # Replace "USER" with your dockerhub username (e.g. 'sujee')
-# docker image tag  allychat    USER/allychat
+docker image tag  allychat    USER/allychat
+# e.g.
+docker image tag  allychat    sujee/allychat
 
 # push it
 docker  push   USER/allychat
