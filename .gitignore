@@ -8,7 +8,6 @@ output*/
 *.db.lock
 
 ## profiling outputs
-*.svg
 *.speed
 
 __pycache__
