@@ -40,4 +40,5 @@ MY_CONFIG.COLLECTION_NAME = 'pages'
 ## LLM Model
 MY_CONFIG.LLM_MODEL = "meta/meta-llama-3-8b-instruct"
 # MY_CONFIG.LLM_MODEL = "meta/meta-llama-3-70b-instruct"
+# MY_CONFIG.LLM_MODEL = "ibm-granite/granite-3.1-2b-instruct"
 # MY_CONFIG.LLM_MODEL = "ibm-granite/granite-3.2-8b-instruct"

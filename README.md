@@ -1,4 +1,4 @@
-<img src="assets/allychat.png" alt="Alley Cat" width="200"/>
+<img src="assets/allycat.png" alt="Alley Cat" width="200"/>
 
 # Chat With AI Alliance Website
 
@@ -20,9 +20,9 @@ This example will show how to crawl a website, process the HTML, create embeddin
 ## Step-1: Setup Python Env
 
 ```bash
-conda create -n allychat-1  python=3.11
+conda create -n allycat-1  python=3.11
 
-conda activate  allychat-1
+conda activate  allycat-1
 ```
 
 Install modules
@@ -101,14 +101,14 @@ Query documents using LLM
 python app.py
 ```
 
-Go to url : http://localhost:5000
+Go to url : http://localhost:8080
 
 ## 8 - Building Docker
 
 To build docker
 
 ```bash
-docker  build  -t allychat  .
+docker  build  -t allycat  .
 ```
 
 Other docker options:
@@ -124,14 +124,14 @@ docker  login
 
 # tag the image to match dockerhub account
 # Replace "USER" with your dockerhub username (e.g. 'sujee')
-docker image tag  allychat    USER/allychat
+docker image tag  allycat    USER/allycat
 # e.g.
-docker image tag  allychat    sujee/allychat
+docker image tag  allycat    sujee/allycat
 
 # push it
-docker  push   USER/allychat
+docker  push   USER/allycat
 # e.g.
-docker  push   sujee/allychat
+docker  push   sujee/allycat
 ```
 
 ## 9 - Running the Docker image
@@ -140,8 +140,8 @@ docker  push   sujee/allychat
 **Flask**
 
 ```bash
-docker run -p 5000:5000 allychat
+docker run -p 8080:8080 allycat
 ```
 
-Go to URL:  http://localhost:5000
+Go to URL:  http://localhost:8080
 
