@@ -2,9 +2,15 @@
 
 # Chat With AI Alliance Website
 
-This example will show how to crawl a website, process the HTML, create embeddings in a vector database, and query them using a RAG archtecture.
+This example will show you how to:
 
-## Open Source Stack
+- crawl a website (we are using [thealliance.ai](https://thealliance.ai/))
+- process the HTML, 
+- create embeddings in a vector database
+- and query them using a RAG archtecture.
+
+
+## Built on Open Source Stack
 
 1. Crawling a website: [Data Prep Kit Connector](https://github.com/data-prep-kit/data-prep-kit/blob/dev/data-connector-lib/doc/overview.md)
 2. Processing HTML --> MD:  [Docling](https://github.com/docling-project/docling)
@@ -103,3 +109,6 @@ python app.py
 
 Go to url : http://localhost:8080
 
+## 8 - Deploy
+
+See [deployment guide](deploy.md)
