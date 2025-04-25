@@ -1,6 +1,6 @@
 <img src="assets/allycat.png" alt="Alley Cat" width="200"/>
 
-# Chat With AI Alliance Website
+# Chat With Data Scraped from any Website
 
 This example will show you how to:
 
