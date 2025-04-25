@@ -33,7 +33,7 @@ MY_CONFIG.CHUNK_OVERLAP = 20
 
 
 ### Milvus config
-MY_CONFIG.DB_URI = './rag_website.db'  # For embedded instance
+MY_CONFIG.DB_URI = './rag_website_milvus.db'  # For embedded instance
 MY_CONFIG.COLLECTION_NAME = 'pages'
 
 

@@ -52,9 +52,8 @@ You can set AllyCat to :
 
 This step will crawl a site and download the HTML files into the `input` directory
 
-[1_crawl_site.ipynb](1_crawl_site.ipynb)
-
-For large websites, it is recommended to run the python script as follows
+- You can run this notebook: [1_crawl_site.ipynb](1_crawl_site.ipynb)
+- Or run the python script
 
 ```bash
 python     1_crawl_site.py
@@ -65,18 +64,32 @@ python     1_crawl_site.py
 
 We will process the HTML files and extract the text as markdown.  The output will be saved in the`output/2-markdown` directory in markdown format
 
-We have 2 processing options:
+We have 2 processing options using Docling or Data Prep Kit.  You can run either one.
+
+Using notebooks:
 
 1. Docling : [2a_process_html_docling.ipynb](2a_process_html_docling.ipynb)
 2. Data Prep Kit: [2b_process_html_dpk.ipynb](2b_process_html_dpk.ipynb)
 
-You can run either one.
+
+Using python:
+
+```python
+python   2a_process_html_docling.py
+# or 
+python   2b_process_html_dpk.py
+```
 
 ## Step-5: Save data into DB
 
 Save the extracted text (markdown) into a vector database (Milvus)
 
-[3_save_to_vector_db.ipynb](3_save_to_vector_db.ipynb)
+- Run the notebook [3_save_to_vector_db.ipynb](3_save_to_vector_db.ipynb)
+- or run python script
+
+```bash
+python   3_save_to_vector_db.py
+```
 
 ## Step-6: Query documents
 
@@ -99,7 +112,12 @@ Once you have an API token, add it to the project like this:
 
 Query documents using LLM
 
-[4_query.ipynb](4_query.ipynb)
+- using notebook [4_query.ipynb](4_query.ipynb)
+- or running python script
+
+```bash
+python  4_query.py
+```
 
 ## 7 - Flask UI
 
