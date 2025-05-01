@@ -39,6 +39,7 @@ MY_CONFIG.COLLECTION_NAME = 'pages'
 ## ---- LLM settings ----
 ## Choose one: We can do local or cloud LLMs
 MY_CONFIG.LLM_RUN_ENV = 'replicate'  # 'replicate' or 'local_ollama'
+# MY_CONFIG.LLM_RUN_ENV = 'local_ollama'  # 'replicate' or 'local_ollama'
 
 ## -- Local LLM --
 ## We will use Ollama for running local LLMs
@@ -51,15 +52,15 @@ if MY_CONFIG.LLM_RUN_ENV == 'local_ollama':
     ## install models: ollama pull <model_name>
     ## e.g. ollama pull gemma3:1b
     
-    # MY_CONFIG.LLM_MODEL = "qwen3:0.6b"   # 522MB
-    # MY_CONFIG.LLM_MODEL = "tinyllama" # 638MB
-    # MY_CONFIG.LLM_MODEL = "gemma3:1b"   # 815MB
-    MY_CONFIG.LLM_MODEL = "llama3.2:1b" # 1.2GB
-    # MY_CONFIG.LLM_MODEL = "gemma3:4b"   # 3.3GB
-    # MY_CONFIG.LLM_MODEL = "llama3.2:8b" # 8.1GB
-    # MY_CONFIG.LLM_MODEL = "gemma3:2b"   # 1.5GB
-    # MY_CONFIG.LLM_MODEL = "gemma3:4b"   # 3.3GB
-    # MY_CONFIG.LLM_MODEL = "gemma3:8b"   # 8.1GB
+    MY_CONFIG.LLM_MODEL = "qwen3:0.6b"      # 522MB
+    # MY_CONFIG.LLM_MODEL = "tinyllama"     # 638MB
+    # MY_CONFIG.LLM_MODEL = "gemma3:1b"     # 815MB
+    # MY_CONFIG.LLM_MODEL = "llama3.2:1b"   # 1.2GB
+    # MY_CONFIG.LLM_MODEL = "gemma3:4b"     # 3.3GB
+    # MY_CONFIG.LLM_MODEL = "llama3.2:8b"   # 8.1GB
+    # MY_CONFIG.LLM_MODEL = "gemma3:2b"     # 1.5GB
+    # MY_CONFIG.LLM_MODEL = "gemma3:4b"     # 3.3GB
+    # MY_CONFIG.LLM_MODEL = "gemma3:8b"     # 8.1GB
 
 
 if MY_CONFIG.LLM_RUN_ENV == 'replicate':
