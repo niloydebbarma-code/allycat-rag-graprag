@@ -1,6 +1,7 @@
 input*/
 output*/
 *.out*
+.directory
 
 .env
 

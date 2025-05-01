@@ -15,6 +15,7 @@ from llama_index.vector_stores.milvus import MilvusVectorStore
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core import Settings
 from llama_index.llms.replicate import Replicate
+from llama_index.llms.ollama import Ollama
 
 
 from my_config import MY_CONFIG
@@ -44,14 +45,25 @@ def initialize():
         Settings.embed_model = HuggingFaceEmbedding(
             model_name = MY_CONFIG.EMBEDDING_MODEL
         )
+        print("✅ Using embedding model: ", MY_CONFIG.EMBEDDING_MODEL)
         
-        ## initialize LLM
-        llm = Replicate(
-            model= MY_CONFIG.LLM_MODEL,
-            temperature=0.1
-        )
+        # Setup LLM
+        if MY_CONFIG.LLM_RUN_ENV == 'replicate':
+            llm = Replicate(
+                model=MY_CONFIG.LLM_MODEL,
+                temperature=0.1
+            )
+        elif MY_CONFIG.LLM_RUN_ENV == 'local_ollama':
+            llm = Ollama(
+                model= MY_CONFIG.LLM_MODEL,
+                request_timeout=30.0,
+                temperature=0.1
+            )
+        else:
+            raise ValueError("❌ Invalid LLM run environment. Please set it to 'replicate' or 'local_ollama'.")
+        print("✅ LLM run environment: ", MY_CONFIG.LLM_RUN_ENV)    
+        print("✅ Using LLM model : ", MY_CONFIG.LLM_MODEL)
         Settings.llm = llm
-        
         
         # Initialize Milvus vector store
         vector_store = MilvusVectorStore(

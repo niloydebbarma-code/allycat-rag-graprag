@@ -11,6 +11,8 @@ from llama_index.vector_stores.milvus import MilvusVectorStore
 from llama_index.core import VectorStoreIndex
 from llama_index.llms.replicate import Replicate
 from dotenv import load_dotenv
+from llama_index.llms.ollama import Ollama
+
 
 ## load env config
 load_dotenv()
@@ -19,6 +21,7 @@ load_dotenv()
 Settings.embed_model = HuggingFaceEmbedding(
     model_name = MY_CONFIG.EMBEDDING_MODEL
 )
+print("✅ Using embedding model: ", MY_CONFIG.EMBEDDING_MODEL)
 
 # Connect to vector db
 vector_store = MilvusVectorStore(
@@ -37,30 +40,44 @@ index = VectorStoreIndex.from_vector_store(
 print("✅ Loaded index from vector db:", MY_CONFIG.DB_URI)
 
 # Setup LLM
-
-llm = Replicate(
-    model=MY_CONFIG.LLM_MODEL,
-    temperature=0.1
-)
+if MY_CONFIG.LLM_RUN_ENV == 'replicate':
+    llm = Replicate(
+        model=MY_CONFIG.LLM_MODEL,
+        temperature=0.1
+    )
+elif MY_CONFIG.LLM_RUN_ENV == 'local_ollama':
+    llm = Ollama(
+        model= MY_CONFIG.LLM_MODEL,
+        request_timeout=30.0,
+        temperature=0.1
+    )
+else:
+    raise ValueError("❌ Invalid LLM run environment. Please set it to 'replicate' or 'local_ollama'.")
+print("✅ LLM run environment: ", MY_CONFIG.LLM_RUN_ENV)    
+print("✅ Using LLM model : ", MY_CONFIG.LLM_MODEL)
 Settings.llm = llm
 
 # Query examples
 query_engine = index.as_query_engine()
 
-# queries = [
-#     "What is AI Alliance?",
-#     "What are the main focus areas of AI Alliance?",
-#     "What are some ai alliance projects?",
-#     "Where was the demo night held?", 
-#     "When was the moon landing?",
-#     "What is the AI Alliance doing in the area of material science?",
-#     "How do I join the AI Alliance?"
-# ]
+queries = [
+    "What is AI Alliance?",
+    "What are the main focus areas of AI Alliance?",
+    "What are some ai alliance projects?",
+    "What are the upcoming events?", 
+    "How do I join the AI Alliance?",
+    "When was the moon landing?",
+]
 
-# for query in queries:
-#     res = query_engine.query(query)
-#     print(f"\nQuery: {query}")
-#     print(f"Response: {res}")
+for query in queries:
+    res = query_engine.query(query)
+    print("-----------------------------------")
+    print(f"\nQuery: {query}")
+    print("------")
+    print(f"Response:\n{res}")
+    print("-----------------------------------")
+
+print("-----------------------------------")
 
 while True:
     # Get user input
@@ -75,7 +92,7 @@ while True:
     try:
         response = query_engine.query(user_query)
         print(f"\nQuery: {user_query}")
-        print(f"Response: {response}")
+        print(f"Response:\n{response}")
         print("-----------------------------------")
     except Exception as e:
         print(f"Error processing query: {e}")
