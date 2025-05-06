@@ -24,7 +24,7 @@ This example will show you how to:
 ![](assets/rag-website-1.png)
 
 ## Prerequisites: 
-- [Python 3.11](https://www.python.org/downloads/) or above
+- [Python 3.11 Environment or above](https://www.python.org/downloads/) or Anaconda Environment
 
 ## Step-1: Setup Python Env
 
