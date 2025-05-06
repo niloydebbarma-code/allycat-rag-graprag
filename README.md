@@ -26,17 +26,25 @@ This example will show you how to:
 ## Prerequisites: 
 - [Python 3.11 Environment or above](https://www.python.org/downloads/) or Anaconda Environment
 
-## Step-1: Setup Python Env
+## Step-1: Clone this repo
+```bash
+git clone https://github.com/The-AI-Alliance/allycat/
+cd allycat
+```
+
+## Step-1a: Setup using Python Environment
+
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+## Step-1b: Setup using Anaconda Environment
 
 ```bash
 conda create -n allycat-1  python=3.11
-
 conda activate  allycat-1
-```
-
-Install modules
-
-```bash
 pip install -r requirements.txt 
 ```
 
