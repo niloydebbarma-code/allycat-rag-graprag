@@ -17,6 +17,7 @@ MY_CONFIG.INPUT_DIR = "input"
 MY_CONFIG.OUTPUT_DIR = "output"
 ### -------------------------------
 
+# Find embedding models: https://huggingface.co/spaces/mteb/leaderboard
 
 # MY_CONFIG.EMBEDDING_MODEL = 'sentence-transformers/all-MiniLM-L6-v2'
 # MY_CONFIG.EMBEDDING_LENGTH = 384
