@@ -23,6 +23,9 @@ This example will show you how to:
 
 ![](assets/rag-website-1.png)
 
+## Prerequisites: 
+- Python 3.11 or above
+
 ## Step-1: Setup Python Env
 
 ```bash
