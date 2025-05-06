@@ -25,6 +25,8 @@ This example will show you how to:
 
 ## Prerequisites: 
 - [Python 3.11 Environment or above](https://www.python.org/downloads/) or Anaconda Environment
+- Replicate account or local Ollama setup (for LLMs)
+- Vector (Milvus) database is installed automatically 
 
 ## Step-1: Clone this repo
 ```bash
