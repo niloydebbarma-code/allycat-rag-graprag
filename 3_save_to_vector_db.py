@@ -12,10 +12,10 @@ from llama_index.vector_stores.milvus import MilvusVectorStore
 from llama_index.core import VectorStoreIndex
 
 # Step-1: Read Markdown files
-pattern = os.path.join(MY_CONFIG.OUTPUT_DIR, '*.md')
+pattern = os.path.join(MY_CONFIG.PROCESSED_DATA_DIR, '*.md')
 md_file_count = len(glob.glob(pattern, recursive=True))
 
-reader = SimpleDirectoryReader(input_dir=MY_CONFIG.OUTPUT_DIR, recursive=False, required_exts=[".md"])
+reader = SimpleDirectoryReader(input_dir=MY_CONFIG.PROCESSED_DATA_DIR, recursive=False, required_exts=[".md"])
 documents = reader.load_data()
 print(f"Loaded {len(documents)} documents from {md_file_count} files")
 

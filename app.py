@@ -16,9 +16,8 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core import Settings
 from llama_index.llms.replicate import Replicate
 from llama_index.llms.ollama import Ollama
-
-
 from my_config import MY_CONFIG
+import query_utils
 
 app = Flask(__name__)
 
@@ -132,6 +131,7 @@ def get_llm_response(message):
         query_engine = vector_index.as_query_engine()
         
         # Query the index
+        message = query_utils.tweak_query(message, MY_CONFIG.LLM_MODEL)
         response = query_engine.query(message)
         
         if response:

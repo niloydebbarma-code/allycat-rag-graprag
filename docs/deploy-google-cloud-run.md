@@ -29,19 +29,16 @@ gcloud auth configure-docker
 
 ## 4 - Build and Tag docker image
 
-Be sure to run through [deployment checklist](deploy.md#checklist)
-
-```bash
-docker  build  -t allycat  .
-```
+Go through [deployment checklist](deploy.md) and build the docker image that is ready to deploy.
 
 Tag the image so it can be pushed to Google Container Registry
 
 ```bash
-docker image tag  allycat    gcr.io/YOUR_PROJECT_ID/allycat
+docker image tag  allycat-deploy    gcr.io/YOUR_PROJECT_ID/allycat-deploy
 
 # e.g.
-# docker image tag  allycat    gcr.io/allycat-456220/allycat
+# docker image tag  allycat-deploy    gcr.io/allycat-456220/allycat-deploy
+# docker image tag  allycat-aialliance-deploy    gcr.io/allycat-456220/allycat-aialliance-deploy
 ```
 
 ## 4 - Push image to Docker registry
@@ -52,49 +49,55 @@ push the image
 docker push gcr.io/YOUR_PROJECT_ID/YOUR_APP_NAME
 
 # e.g.
-# docker push   gcr.io/allycat-456220/allycat
+# docker push   gcr.io/allycat-456220/allycat-deploy
+# docker push   gcr.io/allycat-456220/allycat-aialliance-deploy
 ```
 
 ## 5 - Deploy app to Cloud Run
 
 ```bash
-gcloud run deploy allycat \
+gcloud   run   deploy   allycat \
   --image gcr.io/YOUR_PROJECT_ID/YOUR_APP_NAME \
   --platform managed \
   --region REGION \
   --port 8080 \
   --timeout 200 \
-  --memory 1G \
-  --allow-unauthenticated
+  --memory 8G \
+  --cpu 8 \
+  --allow-unauthenticated \
+  --args="deploy"
 ```
 
 Here is an example
 
 ```bash
-gcloud run deploy allycat \
-  --image gcr.io/allycat-456220/allycat \
+gcloud   run   deploy   allycat \
+  --image gcr.io/allycat-456220/allycat-deploy \
   --platform managed \
   --region us-central1 \
   --port 8080 \
   --timeout 200 \
-  --memory 1G \
-  --allow-unauthenticated
+  --memory 8G \
+  --cpu 8 \
+  --allow-unauthenticated \
+  --args="deploy"
 ```
 
 you can specify additional options like this
 
 ```bash
-gcloud run deploy allycat \
+gcloud   run   deploy   allycat \
   --image gcr.io/YOUR_PROJECT_ID/YOUR_APP_NAME \
   --platform managed \
   --region us-central1 \
-  --memory 1G \
-  --cpu 1 \
+  --memory 8G \
+  --cpu 8 \
   --min-instances=1 \
   --max-instances 5 \
   --concurrency 80 \
   --port 8080 \
-  --set-env-vars "KEY1=VALUE1,KEY2=VALUE2"
+  --set-env-vars "KEY1=VALUE1,KEY2=VALUE2" \
+  --args="deploy"
 ```
 
 ## 6 - Check Running Cloud Run Instances

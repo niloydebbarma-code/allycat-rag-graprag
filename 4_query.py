@@ -12,7 +12,22 @@ from llama_index.core import VectorStoreIndex
 from llama_index.llms.replicate import Replicate
 from dotenv import load_dotenv
 from llama_index.llms.ollama import Ollama
+import query_utils
+import time
 
+
+def run_query(query: str):
+    global query_engine
+    print("-----------------------------------", flush=True)
+    start_time = time.time()
+    query = query_utils.tweak_query(query, MY_CONFIG.LLM_MODEL)
+    print(f"\nProcessing Query:\n{query}", flush=True)
+    res = query_engine.query(query)
+    print(f"\nResponse:\n{res}", flush=True)
+    end_time = time.time()
+    print (f"\nTime taken: {(end_time - start_time):.1f} secs")
+    print("-----------------------------------", flush=True)
+## ======= end : run_query =======
 
 ## load env config
 load_dotenv()
@@ -45,6 +60,10 @@ if MY_CONFIG.LLM_RUN_ENV == 'replicate':
         model=MY_CONFIG.LLM_MODEL,
         temperature=0.1
     )
+    if os.getenv('REPLICATE_API_TOKEN'):
+        print("✅ Found REPLICATE_API_TOKEN")    
+    else:   
+        raise ValueError("❌ Please set the REPLICATE_API_TOKEN environment variable in .env file.")
 elif MY_CONFIG.LLM_RUN_ENV == 'local_ollama':
     llm = Ollama(
         model= MY_CONFIG.LLM_MODEL,
@@ -57,25 +76,20 @@ print("✅ LLM run environment: ", MY_CONFIG.LLM_RUN_ENV)
 print("✅ Using LLM model : ", MY_CONFIG.LLM_MODEL)
 Settings.llm = llm
 
-# Query examples
 query_engine = index.as_query_engine()
 
+# Sample queries
 queries = [
-    "What is AI Alliance?",
-    "What are the main focus areas of AI Alliance?",
-    "What are some ai alliance projects?",
-    "What are the upcoming events?", 
-    "How do I join the AI Alliance?",
-    "When was the moon landing?",
+    # "What is AI Alliance?",
+    # "What are the main focus areas of AI Alliance?",
+    # "What are some ai alliance projects?",
+    # "What are the upcoming events?", 
+    # "How do I join the AI Alliance?",
+    # "When was the moon landing?",
 ]
 
 for query in queries:
-    res = query_engine.query(query)
-    print("-----------------------------------")
-    print(f"\nQuery: {query}")
-    print("------")
-    print(f"Response:\n{res}")
-    print("-----------------------------------")
+    run_query(query)
 
 print("-----------------------------------")
 
@@ -89,10 +103,10 @@ while True:
         break
     
     # Process the query
+    if user_query.strip() == "":
+        continue
+    
     try:
-        response = query_engine.query(user_query)
-        print(f"\nQuery: {user_query}")
-        print(f"Response:\n{response}")
-        print("-----------------------------------")
+        run_query(user_query)
     except Exception as e:
         print(f"Error processing query: {e}")
