@@ -17,7 +17,7 @@
 3. Support for multiple LLMs
    - **Current:** Llama, Granite
 4. Support for multiple vector databases
-   - **Current:** `Milvus`, 'Weaviate'
+   - **Current:** 'Milvus', 'Weaviate'
 5. End User and New Contributor Friendly
 
 ## Why the name **AllyCat**?
