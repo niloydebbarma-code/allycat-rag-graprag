@@ -1,6 +1,30 @@
 <img src="assets/allycat.png" alt="Alley Cat" width="200"/>
 
-# Chat With Data Scraped from any Website
+![License](https://img.shields.io/github/license/The-AI-Alliance/allycat)
+![Issues](https://img.shields.io/github/issues/The-AI-Alliance/allycat)
+![GitHub stars](https://img.shields.io/github/stars/The-AI-Alliance/allycat?style=social)
+
+# AllyCat
+  
+**AllyCat** is full stack, open source chat bot which uses the power of AI to answer questions with data scraped from a website. AllyCat uses a RAG architecture and can support a wide range of LLMs and vector databases). It is meant to run on your laptop, server or cloud.
+
+## 🌟🌟 Features 🌟🌟 
+
+1. Chat app with interface to answers Q&A with data scraped from a website
+   - **Default:** https://thealliance.ai
+   - **In The Roadmap:** [Up To Date List](https://github.com/The-AI-Alliance/gofannon/issues?q=is%3Aissue%20state%3Aopen%20label%3Aframework%20no%3Aassignee)
+2. Includes web scraping, extraction and data processing with Data Prep Kit and Docling. Support for multiple LLMs
+3. Support for multiple LLMs
+   - **Current:** Llama, Granite
+4. Support for multiple vector databases
+   - **Current:** `Milvus`, 'Weaviate'
+5. End User and New Contributor Friendly
+
+## Why the name **AllyCat**?
+
+Originally AllianceChat, we shortened it to a cat with a baret when we found out that chat means cat in French. Because, who doesn't love cats?!
+
+## ⚡️⚡️Quickstart ⚡️⚡️
 
 Allycat is designed to:
 
