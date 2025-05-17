@@ -27,7 +27,7 @@ AllyCat also includes web scraping tools that extract data from your website (or
 5. Support for multiple LLMs
    - **Current:** Llama, Granite
 6. Support for multiple vector databases
-   - **Current:** [Milvus](https://milvus.io/), Weaviate
+   - **Current:** [Milvus](https://milvus.io/), [Weaviate](https://weaviate.io)
 7. End User and New Contributor Friendly
    - **Current:** Run locally with [Ollama](https://ollama.com/), or as a service using [Replicate](https://replicate.com)
 
