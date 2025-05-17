@@ -23,7 +23,7 @@ AllyCat also includes web scraping tools that extract data from your website (or
 2. Includes web crawling & scraping, text extraction, data/HTML processing, conversion to markdown
    - **Current:** [Data Prep Kit Connector](https://github.com/data-prep-kit/data-prep-kit/blob/dev/data-connector-lib/doc/overview.md), [Docling](https://github.com/docling-project/docling)
 3. Processing Chunking, vector embedding creation, saving to vector database
-   - **Current:** [Llama Index](https://docs.llamaindex.ai/en/stable/), [Granite Embedding](https://huggingface.co/ibm-granite/granite-embedding-30m-english)
+   - **Current:** [Llama Index](https://docs.llamaindex.ai/en/stable/), [Granite Embedding Model](https://huggingface.co/ibm-granite/granite-embedding-30m-english)
 4. Supports multiple LLMs
    - **Current:** [Llama](https://www.llama.com), [Granite](https://huggingface.co/collections/ibm-granite/granite-33-language-models-67f65d0cca24bcbd1d3a08e3)
 5. Supports multiple vector databases
@@ -35,20 +35,15 @@ AllyCat also includes web scraping tools that extract data from your website (or
 
 There are two ways to run Allycat.
 
-### Option 1: Quick start using the AllyCat docker image
+### Option 1: Use the Docker image
 
-This is great option if you want a quick evaluation.  
+A great option for a quick evaluation.  
 See [running AllyCat using docker](docs/running-in-docker.md)
 
 ### Option 2: Run natively (for tweaking, developing)
 
-Choose this  option if you like to tweak AllyCat to fit your needs. For example, experimenting with embedding models or LLMs.  
+Choose this option if you want to tweak AllyCat to fit your needs. For example, experimenting with embedding models or LLMs.  
 See [running AllyCat natively](docs/running-natively.md)
-
-
-## Why the name **AllyCat**?
-
-Originally AllianceChat, we shortened it to AllyCat when we learned chat means cat in French. Who doesn't love cats?!
 
 ## AllyCat Workflow
 
@@ -67,3 +62,9 @@ See [deployment guide](docs/deploy.md)
 ## Developing AllyCat
 
 See [developing allycat](docs/developing-allycat.md)
+
+## Why the name **AllyCat**?
+
+Originally AllianceChat, we shortened it to AllyCat when we learned chat means cat in French. Who doesn't love cats?!
+
+
