@@ -6,23 +6,32 @@
 
 # AllyCat
 
-**AllyCat** is full stack, open source chat bot which uses the power of AI to answer questions with data scraped from a website. It uses Data Prep Kit and Docling to scrape and extract text from websites. It then uses an embedding model to add the data to a database where it uses RAG architecture to implement a chatbot. It supports a wide range of LLMs and vector databases. It also meant to run on your laptop, server or cloud.
+**AllyCat** is full stack, open source chatbot that uses GenAI LLMs to answer questions about your website. It is simple by design and will run on your laptop or server. 
+
+## Why? ##
+
+AllyCat is purposefully simple so it can be used by developers to learn how RAG-based GenAI works. But it is powerful enough to use out of the box, or extend for your own purposes. 
+
+## How does it work? 
+AllyCat uses your choice of LLM and vector database to implement a chatbot written in Python using [RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) architecture.
+AllyCat also includes web scraping tools that extract data from your website (or any website) and import it into AllyCat. 
 
 ## 🌟🌟 Features 🌟🌟 
 
 1. Chat app with interface to answers Q&A with data scraped from a website
-   - **Default:** https://thealliance.ai
-   - **In The Roadmap:** [Up To Date List](https://github.com/The-AI-Alliance/gofannon/issues?q=is%3Aissue%20state%3Aopen%20label%3Aframework%20no%3Aassignee)
-2. Includes web scraping, extraction and data processing with Data Prep Kit and Docling. Support for multiple LLMs
-3. Support for multiple LLMs
+   - **Default website:** https://thealliance.ai
+2. Includes web scraping, extraction and data processing
+   - **Current:** Data Prep Kit, Docling
+4. Data Prep Kit and Docling. Support for multiple LLMs
+5. Support for multiple LLMs
    - **Current:** Llama, Granite
-4. Support for multiple vector databases
-   - **Current:** 'Milvus', 'Weaviate'
-5. End User and New Contributor Friendly
+6. Support for multiple vector databases
+   - **Current:** Milvus, Weaviate
+7. End User and New Contributor Friendly
 
 ## Why the name **AllyCat**?
 
-Originally AllianceChat, we shortened it to a cat with a baret when we found out that chat means cat in French. Because, who doesn't love cats?!
+Originally AllianceChat, we shortened it to a cat with a baret when we found out that chat means cat in French. Who doesn't love cats?!
 
 ## ⚡️⚡️Quickstart ⚡️⚡️
 
