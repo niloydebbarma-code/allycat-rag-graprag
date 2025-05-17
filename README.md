@@ -5,8 +5,8 @@
 ![GitHub stars](https://img.shields.io/github/stars/The-AI-Alliance/allycat?style=social)
 
 # AllyCat
-  
-**AllyCat** is full stack, open source chat bot which uses the power of AI to answer questions with data scraped from a website. AllyCat uses a RAG architecture and can support a wide range of LLMs and vector databases). It is meant to run on your laptop, server or cloud.
+
+**AllyCat** is full stack, open source chat bot which uses the power of AI to answer questions with data scraped from a website. It uses Data Prep Kit and Docling to scrape and extract text from websites. It then uses an embedding model to add the data to a database where it uses RAG architecture to implement a chatbot. It supports a wide range of LLMs and vector databases. It also meant to run on your laptop, server or cloud.
 
 ## 🌟🌟 Features 🌟🌟 
 
