@@ -23,7 +23,7 @@ AllyCat also includes web scraping tools that extract data from your website (or
 2. Includes web crawling & scraping, text extraction, data/HTML processing, conversion to markdown
 3. - **Current:** [Data Prep Kit Connector](https://github.com/data-prep-kit/data-prep-kit/blob/dev/data-connector-lib/doc/overview.md), [Docling](https://github.com/docling-project/docling)
 4. Processing Chunking, vector embedding creation, saving to vector database
-   - ** [Llama Index](https://docs.llamaindex.ai/en/stable/), [Granite Embedding](https://huggingface.co/ibm-granite/granite-embedding-30m-english)
+   - **Current:** [Llama Index](https://docs.llamaindex.ai/en/stable/), [Granite Embedding](https://huggingface.co/ibm-granite/granite-embedding-30m-english)
 5. Support for multiple LLMs
    - **Current:** Llama, Granite
 6. Support for multiple vector databases
