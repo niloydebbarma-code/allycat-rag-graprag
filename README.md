@@ -10,53 +10,36 @@
 
 ## Why? ##
 
-AllyCat is purposefully simple so it can be used by developers to learn how RAG-based GenAI works. But it is powerful enough to use out of the box, or extend for your own purposes. 
+AllyCat is purposefully simple so it can be used by developers to learn how RAG-based GenAI works. Yet it is powerful enough to use with your website, You may also extend it for your own purposes. 
 
 ## How does it work? 
 AllyCat uses your choice of LLM and vector database to implement a chatbot written in Python using [RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) architecture.
-AllyCat also includes web scraping tools that extract data from your website (or any website) and import it into AllyCat. 
+AllyCat also includes web scraping tools that extract data from your website (or any website). 
 
 ## 🌟🌟 Features 🌟🌟 
 
-1. Chat app with interface to answers Q&A with data scraped from a website
+1. Chatbot with interface to answer questions with text scraped from a website
    - **Default website:** https://thealliance.ai
-2. Includes web scraping, extraction and data processing
-   - **Current:** Data Prep Kit, Docling
-4. Data Prep Kit and Docling. Support for multiple LLMs
+2. Includes web crawling & scraping, text extraction, data/HTML processing, conversion to markdown
+3. - **Current:** [Data Prep Kit Connector](https://github.com/data-prep-kit/data-prep-kit/blob/dev/data-connector-lib/doc/overview.md), [Docling](https://github.com/docling-project/docling)
+4. Processing Chunking, vector embedding creation, saving to vector database
+   - ** [Llama Index](https://docs.llamaindex.ai/en/stable/), [Granite Embedding](https://huggingface.co/ibm-granite/granite-embedding-30m-english)
 5. Support for multiple LLMs
    - **Current:** Llama, Granite
 6. Support for multiple vector databases
-   - **Current:** Milvus, Weaviate
+   - **Current:** [Milvus](https://milvus.io/), Weaviate
 7. End User and New Contributor Friendly
+   - **Current:** Run locally with [Ollama](https://ollama.com/), or as a service using [Replicate](https://replicate.com)
 
 ## Why the name **AllyCat**?
 
 Originally AllianceChat, we shortened it to a cat with a baret when we found out that chat means cat in French. Who doesn't love cats?!
 
-## ⚡️⚡️Quickstart ⚡️⚡️
-
-Allycat is designed to:
-
-- crawl a website (we are using [thealliance.ai](https://thealliance.ai/))
-- process the HTML, 
-- create embeddings and store in a vector database
-- and query them using an LLM utilizing a RAG archtecture.
-
-
-## Built on Open Source Stack
-
-1. Crawling a website: [Data Prep Kit Connector](https://github.com/data-prep-kit/data-prep-kit/blob/dev/data-connector-lib/doc/overview.md)
-2. Processing HTML --> MD:  [Docling](https://github.com/docling-project/docling)
-3. Processing MD (chunking, saving to vector db): [llama-index](https://docs.llamaindex.ai/en/stable/)
-4. Embedding model: [ibm-granite/granite-embedding-30m-english](https://huggingface.co/ibm-granite/granite-embedding-30m-english)
-5. Vector Database: [Milvus](https://milvus.io/)
-6. LLM:  Use an open source LLM running locally on [ollama](https://ollama.com/) or on a service like [Replicate](https://replicate.com)
-
 ## Workflow
 
 ![](assets/rag-website-1.png)
 
-## Getting Started
+## ⚡️⚡️Quickstart ⚡️⚡️
 
 There are two ways to run Allycat.
 
