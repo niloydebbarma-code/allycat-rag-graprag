@@ -45,7 +45,7 @@ There are two ways to run Allycat.
 
 ### Option 1: Quick start using the Allycat docker image
 
-This is great option if you like to do quick evaluation.  
+This is great option if you want a quick evaluation.  
 See [running allycat using docker](docs/running-in-docker.md)
 
 ### Option 2: Run natively (for tweaking, developing)
@@ -61,11 +61,10 @@ See [running allycat](docs/running-allycat.md)
 
 See [customizing allycat](docs/customizing-allycat.md)
 
-
 ## Deploying AllyCat
 
 See [deployment guide](docs/deploy.md)
 
 ## Developing AllyCat
 
-[developing allycat](docs/developing-allycat.md)
+See [developing allycat](docs/developing-allycat.md)
