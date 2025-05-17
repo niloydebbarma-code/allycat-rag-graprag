@@ -25,7 +25,7 @@ AllyCat also includes web scraping tools that extract data from your website (or
 4. Processing Chunking, vector embedding creation, saving to vector database
    - **Current:** [Llama Index](https://docs.llamaindex.ai/en/stable/), [Granite Embedding](https://huggingface.co/ibm-granite/granite-embedding-30m-english)
 5. Support for multiple LLMs
-   - **Current:** Llama, Granite
+   - **Current:** [Llama](https://www.llama.com), [Granite 3.3](https://huggingface.co/collections/ibm-granite/granite-33-language-models-67f65d0cca24bcbd1d3a08e3)
 6. Support for multiple vector databases
    - **Current:** [Milvus](https://milvus.io/), [Weaviate](https://weaviate.io)
 7. End User and New Contributor Friendly
@@ -33,7 +33,7 @@ AllyCat also includes web scraping tools that extract data from your website (or
 
 ## Why the name **AllyCat**?
 
-Originally AllianceChat, we shortened it to a cat with a baret when we found out that chat means cat in French. Who doesn't love cats?!
+Originally AllianceChat, we shortened it to AllyCat when we learned chat means cat in French. Who doesn't love cats?!
 
 ## Workflow
 
