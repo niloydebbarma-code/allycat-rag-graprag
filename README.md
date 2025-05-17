@@ -19,41 +19,40 @@ AllyCat also includes web scraping tools that extract data from your website (or
 ## 🌟🌟 Features 🌟🌟 
 
 1. Chatbot with interface to answer questions with text scraped from a website
-   - **Default website:** https://thealliance.ai
+   - **Default website:** [thealliance.ai](https://thealliance.ai)
 2. Includes web crawling & scraping, text extraction, data/HTML processing, conversion to markdown
-3. - **Current:** [Data Prep Kit Connector](https://github.com/data-prep-kit/data-prep-kit/blob/dev/data-connector-lib/doc/overview.md), [Docling](https://github.com/docling-project/docling)
-4. Processing Chunking, vector embedding creation, saving to vector database
+   - **Current:** [Data Prep Kit Connector](https://github.com/data-prep-kit/data-prep-kit/blob/dev/data-connector-lib/doc/overview.md), [Docling](https://github.com/docling-project/docling)
+3. Processing Chunking, vector embedding creation, saving to vector database
    - **Current:** [Llama Index](https://docs.llamaindex.ai/en/stable/), [Granite Embedding](https://huggingface.co/ibm-granite/granite-embedding-30m-english)
-5. Supports multiple LLMs
-   - **Current:** [Llama](https://www.llama.com), [Granite 3.3](https://huggingface.co/collections/ibm-granite/granite-33-language-models-67f65d0cca24bcbd1d3a08e3)
-6. Supports multiple vector databases
+4. Supports multiple LLMs
+   - **Current:** [Llama](https://www.llama.com), [Granite](https://huggingface.co/collections/ibm-granite/granite-33-language-models-67f65d0cca24bcbd1d3a08e3)
+5. Supports multiple vector databases
    - **Current:** [Milvus](https://milvus.io/), [Weaviate](https://weaviate.io)
-7. End User and New Contributor Friendly
-   - **Current:** Run locally with [Ollama](https://ollama.com/), or as a service using [Replicate](https://replicate.com)
-
-## Why the name **AllyCat**?
-
-Originally AllianceChat, we shortened it to AllyCat when we learned chat means cat in French. Who doesn't love cats?!
-
-## Workflow
-
-![](assets/rag-website-1.png)
+6. End User and New Contributor Friendly
+   - **Current:** Run locally with [Ollama](https://ollama.com/), or as-a-service on [Replicate](https://replicate.com)
 
 ## ⚡️⚡️Quickstart ⚡️⚡️
 
 There are two ways to run Allycat.
 
-### Option 1: Quick start using the Allycat docker image
+### Option 1: Quick start using the AllyCat docker image
 
 This is great option if you want a quick evaluation.  
-See [running allycat using docker](docs/running-in-docker.md)
+See [running AllyCat using docker](docs/running-in-docker.md)
 
 ### Option 2: Run natively (for tweaking, developing)
 
-Choose this  option if you like to tweak Allycat to fit your needs. For example, experimenting with embedding models or LLMs.  
-See [running Allycat natively](docs/running-natively.md)
+Choose this  option if you like to tweak AllyCat to fit your needs. For example, experimenting with embedding models or LLMs.  
+See [running AllyCat natively](docs/running-natively.md)
+
+
+## Why the name **AllyCat**?
+
+Originally AllianceChat, we shortened it to AllyCat when we learned chat means cat in French. Who doesn't love cats?!
 
 ## AllyCat Workflow
+
+![](assets/rag-website-1.png)
 
 See [running allycat](docs/running-allycat.md)
 
