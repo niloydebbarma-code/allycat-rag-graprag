@@ -1,4 +1,4 @@
-# Running Allycat Natively
+# Running AllyCat Natively
 
 This guide will show you how to run and develop with AllyCat natively.
 
