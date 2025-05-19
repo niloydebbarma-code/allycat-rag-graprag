@@ -4,7 +4,7 @@ This guide will show you how to run and develop with AllyCat natively.
 
 ## Prerequisites: 
 
-- [Python 3.11 Environment or above](https://www.python.org/downloads/) or [Anaconda](https://www.anaconda.com/docs/getting-started/getting-started) Environment
+- [Python 3.11 Environment](https://www.python.org/downloads/) or [Anaconda](https://www.anaconda.com/docs/getting-started/getting-started) Environment
 - Use [Ollama](https://ollama.com) if planning to run LLM locally
 - Use [Replicate](https://replicate.com) if you want to run your LLM in the cloud
 
