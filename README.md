@@ -19,15 +19,15 @@ AllyCat also includes web scraping tools that extract data from your website (or
 ## 🌟🌟 Features 🌟🌟 
 
 1. Chatbot with interface to answer questions with text scraped from a website
-   - **Default website:** [thealliance.ai](https://thealliance.ai)
+   - **Default website:** [thealliance.ai](https://thealliance.ai), but you can choose your own.
 2. Includes web crawling & scraping, text extraction, data/HTML processing, conversion to markdown
-   - **Current:** [Data Prep Kit Connector](https://github.com/data-prep-kit/data-prep-kit/blob/dev/data-connector-lib/doc/overview.md), [Docling](https://github.com/docling-project/docling)
+   - **Currently uses:** [Data Prep Kit Connector](https://github.com/data-prep-kit/data-prep-kit/blob/dev/data-connector-lib/doc/overview.md) and [Docling](https://github.com/docling-project/docling)
 3. Processing Chunking, vector embedding creation, saving to vector database
-   - **Current:** [Llama Index](https://docs.llamaindex.ai/en/stable/), [Granite Embedding Model](https://huggingface.co/ibm-granite/granite-embedding-30m-english)
+   - **Currently uses:** [Llama Index](https://docs.llamaindex.ai/en/stable/) and [Granite Embedding Model](https://huggingface.co/ibm-granite/granite-embedding-30m-english)
 4. Supports multiple LLMs
-   - **Current:** [Llama](https://www.llama.com), [Granite](https://huggingface.co/collections/ibm-granite/granite-33-language-models-67f65d0cca24bcbd1d3a08e3)
+   - **Currently:** [Llama](https://www.llama.com) or [Granite](https://huggingface.co/collections/ibm-granite/granite-33-language-models-67f65d0cca24bcbd1d3a08e3)
 5. Supports multiple vector databases
-   - **Current:** [Milvus](https://milvus.io/), [Weaviate](https://weaviate.io)
+   - **Current:** [Milvus](https://milvus.io/) or [Weaviate](https://weaviate.io)
 6. End User and New Contributor Friendly
    - **Current:** Run locally with [Ollama](https://ollama.com/), or as-a-service on [Replicate](https://replicate.com)
 
