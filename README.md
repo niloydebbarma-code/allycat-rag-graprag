@@ -8,7 +8,7 @@
 
 **AllyCat** is full stack, open source chatbot that uses GenAI LLMs to answer questions about your website. It is simple by design and will run on your laptop or server. 
 
-## Why? ##
+## Why?
 
 AllyCat is purposefully simple so it can be used by developers to learn how RAG-based GenAI works. Yet it is powerful enough to use with your website, You may also extend it for your own purposes. 
 
@@ -19,7 +19,6 @@ AllyCat also includes web scraping tools that extract data from your website (or
 ## 🌟🌟 Features 🌟🌟 
 
 1. Chatbot with interface to answer questions with text scraped from a website
-   - **Default website:** [thealliance.ai](https://thealliance.ai), but you can choose your own.
 2. Includes web crawling & scraping, text extraction, data/HTML processing, conversion to markdown
    - **Currently uses:** [Data Prep Kit Connector](https://github.com/data-prep-kit/data-prep-kit/blob/dev/data-connector-lib/doc/overview.md) and [Docling](https://github.com/docling-project/docling)
 3. Processing Chunking, vector embedding creation, saving to vector database
@@ -27,9 +26,9 @@ AllyCat also includes web scraping tools that extract data from your website (or
 4. Supports multiple LLMs
    - **Currently:** [Llama](https://www.llama.com) or [Granite](https://huggingface.co/collections/ibm-granite/granite-33-language-models-67f65d0cca24bcbd1d3a08e3)
 5. Supports multiple vector databases
-   - **Current:** [Milvus](https://milvus.io/) or [Weaviate](https://weaviate.io)
+   - **Currently:** [Milvus](https://milvus.io/) or [Weaviate](https://weaviate.io)
 6. End User and New Contributor Friendly
-   - **Current:** Run locally with [Ollama](https://ollama.com/), or as-a-service on [Replicate](https://replicate.com)
+   - **Currently:** Run locally with [Ollama](https://ollama.com/), or as-a-service on [Replicate](https://replicate.com)
 
 ## ⚡️⚡️Quickstart ⚡️⚡️
 
