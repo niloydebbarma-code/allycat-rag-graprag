@@ -1,6 +1,6 @@
 <img src="assets/allycat.png" alt="Alley Cat" width="200"/>
 
-![License](https://img.shields.io/github/license/The-AI-Alliance/allycat)
+[![License](https://img.shields.io/github/license/The-AI-Alliance/allycat)](https://github.com/The-AI-Alliance/allycat/blob/main/LICENSE)
 ![Issues](https://img.shields.io/github/issues/The-AI-Alliance/allycat)
 ![GitHub stars](https://img.shields.io/github/stars/The-AI-Alliance/allycat?style=social)
 
