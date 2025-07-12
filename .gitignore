@@ -5,7 +5,7 @@ venv*
 .vscode
 tmp
 
-.env
+.env*
 
 *.db
 *.db.lock

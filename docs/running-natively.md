@@ -48,11 +48,23 @@ conda activate  allycat-1
 pip install -r requirements.txt 
 ```
 
-## LLM setup
+## Step-3 (Optional): Create an `.env` file
 
-We only need option (3) or (4)
+You can optionally specifify settings for Allycat using `.env` file.
 
-## Step-3: Ollama Setup
+Start with the provided sample env file
+
+```bash
+cp   env.sample.txt  .env
+```
+
+And make any necessary changes to `.env` file.
+
+## Step-4: LLM setup
+
+We only need option (4A) or (4B)
+
+## Step-4A: Ollama Setup
 
 
 We will use [ollama](https://ollama.com/) for running open LLMs locally.
@@ -60,7 +72,7 @@ This is the default setup.
 
 Follow [setup instructions from Ollama site](https://ollama.com/download)
 
-## Step-4: Replicate Setup (Optional)
+## Step-4B: Replicate Setup (Optional)
 
 For this step, we will be using Replicate API service.  We need a Replicate API token for this step.
 
@@ -72,8 +84,7 @@ Follow these steps:
 
 Once you have an API token, add it to the project like this:
 
-- Copy the file `env.sample.txt` into `.env`  (note the dot in the beginning of the filename)
-- Add your token to `REPLICATE_API_TOKEN` in the .env file.  Save this file.
+- Add your token to `REPLICATE_API_TOKEN` in the .env file (as specified in step-3)
 
 ## Step-5: Continue to workflow
 

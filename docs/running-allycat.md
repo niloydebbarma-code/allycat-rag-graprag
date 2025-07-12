@@ -26,15 +26,19 @@ conda  activate  allycat-1  # what ever the name of the env
 ```
 
 
-## Step-0: Check Configuration
+## Step-0 (Optional): Configuration
 
-Inspect configuration here: [my_config.py](../my_config.py)
+This step is optional.  Allycat runs fine with default configuration options.  You can customize them to fit your needs.
 
-You can configure:
+A sample `env.sample.txt` is provided.  Copy this file into `.env` file.
 
-- how many files to download and crawl depth
-- embedding model to use
-- LLM run time and model to use
+```bash
+cp  env.sample.txt  .env
+```
+
+And edit `.env` file to make your changes.
+
+Note: Allycat will work fine without an `.env` file
 
 ## Step-1: Crawl a website
 
