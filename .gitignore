@@ -3,6 +3,7 @@ workspace/
 .directory
 venv*
 .vscode
+tmp
 
 .env
 
