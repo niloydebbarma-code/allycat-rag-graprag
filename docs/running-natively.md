@@ -4,7 +4,7 @@ This guide will show you how to run and develop with AllyCat natively.
 
 ## Prerequisites: 
 
-- [Python 3.11 Environment](https://www.python.org/downloads/) or [Anaconda](https://www.anaconda.com/docs/getting-started/getting-started) Environment
+- [Python 3.11 Environment](https://www.python.org/downloads/).  You can use [uv](https://docs.astral.sh/uv/) (recommended) or [Anaconda](https://www.anaconda.com/docs/getting-started/getting-started) or [conda-forge](https://conda-forge.org/)
 - Use [Ollama](https://ollama.com) if planning to run LLM locally
 - Use [Replicate](https://replicate.com) if you want to run your LLM in the cloud
 
@@ -17,7 +17,18 @@ cd allycat
 
 ## Step-2: Setup Python Environment
 
-## 2a: Using python virtual env
+## 2a (recommended): using `uv`
+
+```bash
+uv sync
+
+# create a ipykernel to run notebooks with vscode / jupyter / etc
+source  .venv/bin/activate
+python -m ipykernel install --user --name=allycat-1 --display-name "allycat-1"
+## Choose this kernel 'allycat-1' within jupyter / vscode
+```
+
+## 2b: Using python virtual env
 
 ```bash
 python -m venv venv
@@ -25,7 +36,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## 2b: Setup using Anaconda Environment
+## 2c: Setup using Anaconda Environment
 
 Install [Anaconda](https://www.anaconda.com/) or [conda forge](https://conda-forge.org/)
 

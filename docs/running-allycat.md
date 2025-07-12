@@ -12,6 +12,19 @@ Make sure you have completed either
 - [native python env setup](running-natively.md)
 - or [docker env setup](running-in-docker.md)
 
+If running natively, activate your python env
+
+```bash
+## if using uv
+source .venv/bin/activate
+
+## if using python venv
+source  venv/bin/activate
+
+## If using conda
+conda  activate  allycat-1  # what ever the name of the env
+```
+
 
 ## Step-0: Check Configuration
 
