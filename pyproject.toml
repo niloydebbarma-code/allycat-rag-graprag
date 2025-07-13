@@ -6,8 +6,6 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "chainlit>=2.2.1",
-    "data-prep-connector>=0.2.3",
-    "data-prep-toolkit-transforms[html2parquet,web2parquet]==1.1.0",
     "docling>=2.41.0",
     "flask>=3.1.1",
     "humanfriendly>=10.0",
@@ -22,7 +20,6 @@ dependencies = [
     "pandas>=2.3.1",
     "pymilvus>=2.5.12",
     "tqdm>=4.67.1",
-    "trafilatura>=1.12.0",
 ]
 
 [dependency-groups]

@@ -42,45 +42,29 @@ Note: Allycat will work fine without an `.env` file
 
 ## Step-1: Crawl a website
 
-This step will crawl a site and download the HTML files into the `workspace/crawled` directory
+This step will crawl a site and download the website content into the `workspace/crawled` directory
 
-- You can run this notebook: [1_crawl_site.ipynb](1_crawl_site.ipynb)
-- Or run the python script: [1_crawl_site.py](1_crawl_site.py)
+code: [1_crawl_site.py](1_crawl_site.py)
 
 ```bash
 # default settings
 python     1_crawl_site.py  --url https://thealliance.ai
 # or specify parameters
-python  1_crawl_site.py   --url URL --max-downloads 100 --max-depth 5
+python  1_crawl_site.py   --url https://thealliance.ai --max-downloads 100 --max-depth 5
 ```
 
 
-## Step-2: Process HTML files
+## Step-2: Process Downloaded files
 
-We will process the HTML files and extract the text as markdown.  The output will be saved in the`workspace/processed` directory in markdown format
+We will process the downloaded files (html / pdf) and extract the text as markdown.  The output will be saved in the`workspace/processed` directory in markdown format
 
-We have 2 processing options:
-1. Docling
-2. Data Prep Kit.  
+We use [Docling](https://github.com/docling-project/docling) to process downloaded files.  It will convert the files into markdown format for easy digestion.
 
-You just need to use one.
-
-### 2a: Docling
-
-Use notebook:  [2a_process_html_docling.ipynb](2a_process_html_docling.ipynb)  
-or Use python script: [2a_process_html_docling.py](2a_process_html_docling.py)
+- Run notebook (great for debugging / experimenting):  [2_process_files.ipynb](2_process_files.ipynb)  
+- or Use python script: [2_process_files.py](2_process_files.py)
 
 ```bash
-python   2a_process_html_docling.py
-```
-
-### 2b: Data Prep Kit
-
-Use notebook: [2b_process_html_dpk.ipynb](2b_process_html_dpk.ipynb)  
-or Use python script: [2b_process_html_dpk.py](2b_process_html_dpk.py)
-
-```bash
-python   2b_process_html_dpk.py
+python   2_process_files.py
 ```
 
 ## Step-3: Save data into DB

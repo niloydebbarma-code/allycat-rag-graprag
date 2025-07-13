@@ -3,9 +3,6 @@ import requests
 from humanfriendly import format_size
 import pandas as pd
 import glob
-from dpk_connector.core.utils import (
-    urlparse_cached
-)
 from urllib.parse import unquote
 
 

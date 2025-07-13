@@ -14,19 +14,29 @@ from dotenv import load_dotenv
 from llama_index.llms.ollama import Ollama
 import query_utils
 import time
+import logging
+import json
+
+logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s', force=True)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 def run_query(query: str):
     global query_engine
-    print("-----------------------------------", flush=True)
+    logger.info (f"-----------------------------------")
     start_time = time.time()
     query = query_utils.tweak_query(query, MY_CONFIG.LLM_MODEL)
-    print(f"\nProcessing Query:\n{query}", flush=True)
+    logger.info (f"\nProcessing Query:\n{query}")
     res = query_engine.query(query)
-    print(f"\nResponse:\n{res}", flush=True)
     end_time = time.time()
-    print (f"\nTime taken: {(end_time - start_time):.1f} secs")
-    print("-----------------------------------", flush=True)
+    logger.info ( "-------"
+                 + f"\nResponse:\n{res}" 
+                 + f"\n\nTime taken: {(end_time - start_time):.1f} secs"
+                 + f"\n\nResponse Metadata:\n{json.dumps(res.metadata, indent=2)}" 
+                #  + f"\nSource Nodes: {[node.node_id for node in res.source_nodes]}"
+                 )
+    logger.info (f"-----------------------------------")
 ## ======= end : run_query =======
 
 ## load env config
@@ -36,7 +46,7 @@ load_dotenv()
 Settings.embed_model = HuggingFaceEmbedding(
     model_name = MY_CONFIG.EMBEDDING_MODEL
 )
-print("✅ Using embedding model: ", MY_CONFIG.EMBEDDING_MODEL)
+logger.info (f"✅ Using embedding model: {MY_CONFIG.EMBEDDING_MODEL}")
 
 # Connect to vector db
 vector_store = MilvusVectorStore(
@@ -46,13 +56,13 @@ vector_store = MilvusVectorStore(
     overwrite=False  # so we load the index from db
 )
 storage_context = StorageContext.from_defaults(vector_store=vector_store)
-print("✅ Connected to Milvus instance: ", MY_CONFIG.DB_URI)
+logger.info (f"✅ Connected to Milvus instance: {MY_CONFIG.DB_URI}")
 
 # Load Document Index from DB
 
 index = VectorStoreIndex.from_vector_store(
     vector_store=vector_store, storage_context=storage_context)
-print("✅ Loaded index from vector db:", MY_CONFIG.DB_URI)
+logger.info (f"✅ Loaded index from vector db: {MY_CONFIG.DB_URI}")
 
 # Setup LLM
 if MY_CONFIG.LLM_RUN_ENV == 'replicate':
@@ -61,8 +71,8 @@ if MY_CONFIG.LLM_RUN_ENV == 'replicate':
         temperature=0.1
     )
     if os.getenv('REPLICATE_API_TOKEN'):
-        print("✅ Found REPLICATE_API_TOKEN")    
-    else:   
+        logger.info (f"✅ Found REPLICATE_API_TOKEN")
+    else:
         raise ValueError("❌ Please set the REPLICATE_API_TOKEN environment variable in .env file.")
 elif MY_CONFIG.LLM_RUN_ENV == 'local_ollama':
     llm = Ollama(
@@ -72,8 +82,8 @@ elif MY_CONFIG.LLM_RUN_ENV == 'local_ollama':
     )
 else:
     raise ValueError("❌ Invalid LLM run environment. Please set it to 'replicate' or 'local_ollama'.")
-print("✅ LLM run environment: ", MY_CONFIG.LLM_RUN_ENV)    
-print("✅ Using LLM model : ", MY_CONFIG.LLM_MODEL)
+logger.info (f"✅ LLM run environment: {MY_CONFIG.LLM_RUN_ENV}")
+logger.info (f"✅ Using LLM model : {MY_CONFIG.LLM_MODEL}")
 Settings.llm = llm
 
 query_engine = index.as_query_engine()
@@ -91,7 +101,7 @@ queries = [
 for query in queries:
     run_query(query)
 
-print("-----------------------------------")
+logger.info (f"-----------------------------------")
 
 while True:
     # Get user input
@@ -99,7 +109,7 @@ while True:
     
     # Check if user wants to quit
     if user_query.lower() in ['quit', 'exit', 'q']:
-        print("Goodbye!")
+        logger.info ("Goodbye!")
         break
     
     # Process the query
@@ -109,4 +119,5 @@ while True:
     try:
         run_query(user_query)
     except Exception as e:
+        logger.error(f"Error processing query: {e}")
         print(f"Error processing query: {e}")
