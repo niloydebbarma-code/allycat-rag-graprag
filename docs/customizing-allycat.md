@@ -1,5 +1,7 @@
 # Customizing Allycat
 
+Allycat is highly customizable.  See [configuration](configuration.md) for all available configs.
+
 - [1 - To try a different LLM with Ollama](#1---to-try-a-different-llm-with-ollama)
 - [2 - Trying a different model with Replicate](#2---trying-a-different-model-with-replicate)
 
