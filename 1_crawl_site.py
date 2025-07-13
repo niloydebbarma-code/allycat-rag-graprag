@@ -22,14 +22,46 @@ class WebScraper:
         self.max_downloads = max_downloads
         self.depth = depth
         self.visited_urls = set()
+        self.downloaded_base_urls = set()  # Track base URLs without fragments
         self.downloaded_count = 0
         
     def scrape_page(self, url, current_depth=0):
         try:
-            response = requests.get(url, timeout=10)
+            # For downloading, we need to remove fragment since HTTP requests ignore them
+            parsed_url = urlparse(url)
+            download_url = f"{parsed_url.scheme}://{parsed_url.netloc}{parsed_url.path}"
+            if parsed_url.query:
+                download_url += f"?{parsed_url.query}"
+            
+            # Check if we've already downloaded this base URL content
+            if download_url in self.downloaded_base_urls:
+                # If we have a fragment and haven't visited this exact URL, save with fragment name
+                if parsed_url.fragment and url not in self.visited_urls:
+                    # Get the cached response if we have one, otherwise make a request
+                    response = requests.get(download_url, timeout=10)
+                    response.raise_for_status()
+                    
+                    filename = self.url_to_filename(url, response)
+                    filepath = os.path.join(MY_CONFIG.CRAWL_DIR, filename)
+                    
+                    with open(filepath, 'w', encoding='utf-8') as f:
+                        f.write(response.text)
+                    
+                    self.downloaded_count += 1
+                    logger.info(f"Saved {filepath} with fragment ({self.downloaded_count}/{self.max_downloads})")
+                    
+                    return []  # Don't re-parse links from same content
+                else:
+                    logger.info(f"Skipping already downloaded URL: {download_url}")
+                    return []
+            
+            response = requests.get(download_url, timeout=10)
             response.raise_for_status()
             
-            # Save file
+            # Track that we've downloaded this base URL
+            self.downloaded_base_urls.add(download_url)
+            
+            # Save file using original URL (with fragment) for unique filename
             filename = self.url_to_filename(url, response)
             filepath = os.path.join(MY_CONFIG.CRAWL_DIR, filename)
             
@@ -60,11 +92,16 @@ class WebScraper:
         parsed = urlparse(url)
         domain = parsed.netloc
         path = parsed.path
+        fragment = parsed.fragment
         
         if not path or path == '/':
             filename = f"{domain}__index"
         else:
             filename = f"{domain}{path.replace('/', '__')}"
+        
+        # Add fragment (anchor) to filename if present
+        if fragment:
+            filename = f"{filename}__{fragment}"
         
         filename = re.sub(r'[^\w\-_.]', '_', filename)
         
