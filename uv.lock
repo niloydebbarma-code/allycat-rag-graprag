@@ -156,10 +156,10 @@ dependencies = [
     { name = "docling" },
     { name = "flask" },
     { name = "humanfriendly" },
+    { name = "litellm" },
     { name = "llama-index" },
     { name = "llama-index-embeddings-huggingface" },
-    { name = "llama-index-llms-ollama" },
-    { name = "llama-index-llms-replicate" },
+    { name = "llama-index-llms-litellm" },
     { name = "llama-index-vector-stores-milvus" },
     { name = "milvus-lite" },
     { name = "mimetypes-magic" },
@@ -180,10 +180,10 @@ requires-dist = [
     { name = "docling", specifier = ">=2.41.0" },
     { name = "flask", specifier = ">=3.1.1" },
     { name = "humanfriendly", specifier = ">=10.0" },
+    { name = "litellm", specifier = ">=1.74.3" },
     { name = "llama-index", specifier = ">=0.12.48" },
     { name = "llama-index-embeddings-huggingface", specifier = ">=0.5.5" },
-    { name = "llama-index-llms-ollama", specifier = ">=0.6.2" },
-    { name = "llama-index-llms-replicate", specifier = ">=0.4.0" },
+    { name = "llama-index-llms-litellm", specifier = ">=0.5.1" },
     { name = "llama-index-vector-stores-milvus", specifier = ">=0.8.5" },
     { name = "milvus-lite", specifier = ">=2.5.1" },
     { name = "mimetypes-magic", specifier = ">=0.4.30" },
@@ -1467,6 +1467,28 @@ wheels = [
 ]
 
 [[package]]
+name = "litellm"
+version = "1.74.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "aiohttp" },
+    { name = "click" },
+    { name = "httpx" },
+    { name = "importlib-metadata" },
+    { name = "jinja2" },
+    { name = "jsonschema" },
+    { name = "openai" },
+    { name = "pydantic" },
+    { name = "python-dotenv" },
+    { name = "tiktoken" },
+    { name = "tokenizers" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/cd/e3/3091066f6682016840e9a36111560656b609b95de04b2ec7b19ad2580eaa/litellm-1.74.3.tar.gz", hash = "sha256:a9e87ebe78947ceec67e75f830f1c956cc653b84563574241acea9c84e7e3ca1", size = 9256457, upload-time = "2025-07-12T20:06:06.128Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/14/6f/07735b5178f32e28daf8a30ed6ad3e2c8c06ac374dc06aecde007110470f/litellm-1.74.3-py3-none-any.whl", hash = "sha256:638ec73633c6f2cf78a7343723d8f3bc13c192558fcbaa29f3ba6bc7802e8663", size = 8618899, upload-time = "2025-07-12T20:06:03.609Z" },
+]
+
+[[package]]
 name = "literalai"
 version = "0.1.103"
 source = { registry = "https://pypi.org/simple" }
@@ -1678,16 +1700,16 @@ wheels = [
 ]
 
 [[package]]
-name = "llama-index-llms-ollama"
-version = "0.6.2"
+name = "llama-index-llms-litellm"
+version = "0.5.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
+    { name = "litellm" },
     { name = "llama-index-core" },
-    { name = "ollama" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/84/77/b2a7b93fb5680fd8daf71ab23de45723dca602b1fff0907fb47bb79ca598/llama_index_llms_ollama-0.6.2.tar.gz", hash = "sha256:1be4081f0ba9c9dd3b5d270c2e8009c256b3b6a1312cb38a0c724dba8bac1304", size = 8441, upload-time = "2025-06-07T15:35:36.925Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/4d/13/64d3d2db8924eec085c05addaf8279f0ba95b28820ea4f035d0ba77cf711/llama_index_llms_litellm-0.5.1.tar.gz", hash = "sha256:b99460b0d1ef7cf48e02d139dc5358e6818a80b95633ba67d8438c73e180f5ef", size = 10611, upload-time = "2025-06-04T11:53:39.934Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/aa/3a/49ad5945316be3dfaafc0f3d2c10c95fabd74aa5c7209f8d9ee89c91f76b/llama_index_llms_ollama-0.6.2-py3-none-any.whl", hash = "sha256:b714311c3a1e3e5c9d9d2a46c1c12cc3e6865e8b81f1863412da41c1725a1144", size = 8137, upload-time = "2025-06-07T15:35:35.584Z" },
+    { url = "https://files.pythonhosted.org/packages/7c/df/87bb97f75390aff4a4a479c329d27dd27d6069451574176eaaf837f67e07/llama_index_llms_litellm-0.5.1-py3-none-any.whl", hash = "sha256:f63c8384d051a9983a86e6f00f79cd9d6a5b81a035a4cff7c1548c3ff4b4d7f0", size = 10881, upload-time = "2025-06-04T11:53:38.619Z" },
 ]
 
 [[package]]
@@ -1701,18 +1723,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/d9/39/a7ce514fb500951e9edb713ed918a9ffe49f1a76fccfc531a4ec5c7fe15a/llama_index_llms_openai-0.4.7.tar.gz", hash = "sha256:564af8ab39fb3f3adfeae73a59c0dca46c099ab844a28e725eee0c551d4869f8", size = 24251, upload-time = "2025-06-16T03:38:47.175Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/61/e9/391926dad180ced6bb37a62edddb8483fbecde411239bd5e726841bb77b4/llama_index_llms_openai-0.4.7-py3-none-any.whl", hash = "sha256:3b8d9d3c1bcadc2cff09724de70f074f43eafd5b7048a91247c9a41b7cd6216d", size = 25365, upload-time = "2025-06-16T03:38:45.72Z" },
-]
-
-[[package]]
-name = "llama-index-llms-replicate"
-version = "0.4.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "llama-index-core" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/3c/3e/e06201bbcd87a5480cc4439bfdf8bc845ded627eb2a8af6554bdb254f782/llama_index_llms_replicate-0.4.0.tar.gz", hash = "sha256:46df7cb4e6c0a0543aef44cb88da81cc90a49619fb769257bf085b56fba88006", size = 2959, upload-time = "2024-11-18T00:45:45.89Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/78/be/f7e76e1cf6f6a5f36d2b841d819fa5c7f16d14bb80f82a4ee6e9c6dd6fef/llama_index_llms_replicate-0.4.0-py3-none-any.whl", hash = "sha256:07ba499b99a34dc830c0f2b26e88eb076ff53bfd177aa1e27cc062277a3c5869", size = 3184, upload-time = "2024-11-18T00:45:45.059Z" },
 ]
 
 [[package]]
@@ -2385,19 +2395,6 @@ source = { registry = "https://pypi.org/simple" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/56/9a/fff8376f8e3d084cd1530e1ef7b879bb7d6d265620c95c1b322725c694f4/nvidia_nvtx_cu12-12.6.77-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:b90bed3df379fa79afbd21be8e04a0314336b8ae16768b58f2d34cb1d04cd7d2", size = 89276, upload-time = "2024-11-20T17:38:27.621Z" },
     { url = "https://files.pythonhosted.org/packages/9e/4e/0d0c945463719429b7bd21dece907ad0bde437a2ff12b9b12fee94722ab0/nvidia_nvtx_cu12-12.6.77-py3-none-manylinux2014_x86_64.whl", hash = "sha256:6574241a3ec5fdc9334353ab8c479fe75841dbe8f4532a8fc97ce63503330ba1", size = 89265, upload-time = "2024-10-01T17:00:38.172Z" },
-]
-
-[[package]]
-name = "ollama"
-version = "0.5.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "httpx" },
-    { name = "pydantic" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/8d/96/c7fe0d2d1b3053be614822a7b722c7465161b3672ce90df71515137580a0/ollama-0.5.1.tar.gz", hash = "sha256:5a799e4dc4e7af638b11e3ae588ab17623ee019e496caaf4323efbaa8feeff93", size = 41112, upload-time = "2025-05-30T21:32:48.679Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/d6/76/3f96c8cdbf3955d7a73ee94ce3e0db0755d6de1e0098a70275940d1aff2f/ollama-0.5.1-py3-none-any.whl", hash = "sha256:4c8839f35bc173c7057b1eb2cbe7f498c1a7e134eafc9192824c8aecb3617506", size = 13369, upload-time = "2025-05-30T21:32:47.429Z" },
 ]
 
 [[package]]

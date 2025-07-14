@@ -46,36 +46,9 @@ MY_CONFIG.COLLECTION_NAME = 'pages'
 
 ## ---- LLM settings ----
 ## Choose one: We can do local or cloud LLMs
-# MY_CONFIG.LLM_RUN_ENV = 'replicate'  # 'replicate' or 'local_ollama'
-MY_CONFIG.LLM_RUN_ENV = 'local_ollama'  # 'replicate' or 'local_ollama'
+## Local LLMs are run on your machine using Ollama
+## Cloud LLMs are run on any LiteLLM supported service like Replicate / Nebius / etc
+## For running Ollama locally, please check the instructions in the docs/ollama.md file
 
-## -- Local LLM --
-## We will use Ollama for running local LLMs
-## Ollama: https://ollama.com/
-## 1. Install Ollama: https://ollama.com/download
-## 2. Install models: https://ollama.com/models
-## 3. If you change the ollama model here, also update this file: docker-startup.sh
-if MY_CONFIG.LLM_RUN_ENV == 'local_ollama':
-    ## available Ollama models: https://ollama.com/models
-    ## install models: ollama pull <model_name>
-    ## e.g. ollama pull gemma3:1b
-    
-    # MY_CONFIG.LLM_MODEL = "qwen3:0.6b"      # 522MB
-    # MY_CONFIG.LLM_MODEL = "tinyllama"     # 638MB
-    MY_CONFIG.LLM_MODEL = "gemma3:1b"     # 815MB
-    # MY_CONFIG.LLM_MODEL = "llama3.2:1b"   # 1.2GB
-    # MY_CONFIG.LLM_MODEL = "qwen3:1.7b"      # 1.4 GB
-    # MY_CONFIG.LLM_MODEL = "gemma3:4b"     # 3.3GB
-    # MY_CONFIG.LLM_MODEL = "llama3.2:8b"   # 8.1GB
-    # MY_CONFIG.LLM_MODEL = "gemma3:2b"     # 1.5GB
-    # MY_CONFIG.LLM_MODEL = "gemma3:4b"     # 3.3GB
-    # MY_CONFIG.LLM_MODEL = "gemma3:8b"     # 8.1GB
+MY_CONFIG.LLM_MODEL = os.getenv("LLM_MODEL", 'ollama/gemma3:1b')
 
-
-if MY_CONFIG.LLM_RUN_ENV == 'replicate':
-    ## LLM Model for replicate service
-    ## available models: https://replicate.com/explore
-    MY_CONFIG.LLM_MODEL = "meta/meta-llama-3-8b-instruct"
-    # MY_CONFIG.LLM_MODEL = "meta/meta-llama-3-70b-instruct"
-    # MY_CONFIG.LLM_MODEL = "ibm-granite/granite-3.1-2b-instruct"
-    # MY_CONFIG.LLM_MODEL = "ibm-granite/granite-3.2-8b-instruct"

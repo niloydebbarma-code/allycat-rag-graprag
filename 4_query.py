@@ -9,9 +9,8 @@ from llama_index.core import Settings
 from llama_index.core import VectorStoreIndex, StorageContext
 from llama_index.vector_stores.milvus import MilvusVectorStore
 from llama_index.core import VectorStoreIndex
-from llama_index.llms.replicate import Replicate
 from dotenv import load_dotenv
-from llama_index.llms.ollama import Ollama
+from llama_index.llms.litellm import LiteLLM
 import query_utils
 import time
 import logging
@@ -65,27 +64,11 @@ index = VectorStoreIndex.from_vector_store(
 logger.info (f"✅ Loaded index from vector db: {MY_CONFIG.DB_URI}")
 
 # Setup LLM
-if MY_CONFIG.LLM_RUN_ENV == 'replicate':
-    llm = Replicate(
-        model=MY_CONFIG.LLM_MODEL,
-        temperature=0.1
-    )
-    if os.getenv('REPLICATE_API_TOKEN'):
-        logger.info (f"✅ Found REPLICATE_API_TOKEN")
-    else:
-        raise ValueError("❌ Please set the REPLICATE_API_TOKEN environment variable in .env file.")
-elif MY_CONFIG.LLM_RUN_ENV == 'local_ollama':
-    llm = Ollama(
-        model= MY_CONFIG.LLM_MODEL,
-        request_timeout=30.0,
-        temperature=0.1
-    )
-else:
-    raise ValueError("❌ Invalid LLM run environment. Please set it to 'replicate' or 'local_ollama'.")
-logger.info (f"✅ LLM run environment: {MY_CONFIG.LLM_RUN_ENV}")
 logger.info (f"✅ Using LLM model : {MY_CONFIG.LLM_MODEL}")
-Settings.llm = llm
-
+Settings.llm = LiteLLM (
+        model=MY_CONFIG.LLM_MODEL,
+    )
+ 
 query_engine = index.as_query_engine()
 
 # Sample queries

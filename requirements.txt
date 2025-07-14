@@ -9,13 +9,12 @@ milvus-lite
 ## Weaviate DB
 # weaviate-client
 
-
+litellm
 
 ## --- llama-index
 llama-index
 llama-index-embeddings-huggingface
-llama-index-llms-replicate
-llama-index-llms-ollama
+llama-index-llms-litellm
 llama-index-vector-stores-milvus
 
 ## --- UI - flask
