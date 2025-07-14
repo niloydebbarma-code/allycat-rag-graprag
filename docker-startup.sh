@@ -28,8 +28,8 @@ if [ "$1" == "deploy" ]; then
 
   echo "Starting web server..."
   # run the web server in foreground so the container doesn't exit
-  python3 app.py 
-  # python3 app.py > /allycat/app.out 2>&1 &
+  python3 app_flask.py 
+  # python3 app_flask.py > /allycat/app.out 2>&1 &
   # # wait for the web server to start
   # while ! nc -z localhost 8080; do
   #   # cat /allycat/app.out
@@ -41,7 +41,7 @@ else
   echo "To download the model, run: "
   echo "      ollama pull $ollama_model"
   echo "You can run the following commands to start the web server:"
-  echo "      python3 app.py"
+  echo "      python3 app_flask.py"
   echo "Then open your browser and go to http://localhost:8080"
   echo "To stop the web server, run: killall python3"
   echo "To stop the ollama server, run: killall ollama"

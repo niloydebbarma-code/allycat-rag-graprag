@@ -48,6 +48,6 @@ EXPOSE 8080
 # Expose the port for Ollama
 EXPOSE 11434
 
-# CMD ["python", "app.py"]
+# CMD ["python", "app_flask.py"]
 # CMD ["./docker-startup.sh"]
 ENTRYPOINT ["./docker-startup.sh"]

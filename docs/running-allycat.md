@@ -156,14 +156,14 @@ We have two options for the web UI:
 ### 5.1 - Option 1: Flask UI
 
 ```bash
-python app.py
+python app_flask.py
 ```
 Go to url : http://localhost:8080  and start chatting!
 
 ### 5.2 - Option 2: Chainlit UI
 
 ```bash
-chainlit run chainlit_app.py --port 8090
+chainlit run app_chainlit.py --port 8090
 ```
 Go to url : http://localhost:8090  and start chatting!
 
