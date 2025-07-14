@@ -44,8 +44,16 @@ class WebScraper:
                     filename = self.url_to_filename(url, response)
                     filepath = os.path.join(MY_CONFIG.CRAWL_DIR, filename)
                     
-                    with open(filepath, 'w', encoding='utf-8') as f:
-                        f.write(response.text)
+                    # Handle binary files vs text files based on mime type
+                    mime_type = response.headers.get('Content-Type', '').lower()
+                    is_text = mime_type.startswith('text/') or 'html' in mime_type or 'xml' in mime_type
+                    
+                    if is_text:
+                        with open(filepath, 'w', encoding='utf-8') as f:
+                            f.write(response.text)
+                    else:
+                        with open(filepath, 'wb') as f:
+                            f.write(response.content)
                     
                     self.downloaded_count += 1
                     logger.info(f"Saved {filepath} with fragment ({self.downloaded_count}/{self.max_downloads})")
@@ -65,8 +73,16 @@ class WebScraper:
             filename = self.url_to_filename(url, response)
             filepath = os.path.join(MY_CONFIG.CRAWL_DIR, filename)
             
-            with open(filepath, 'w', encoding='utf-8') as f:
-                f.write(response.text)
+            # Handle binary files vs text files based on mime type
+            mime_type = response.headers.get('Content-Type', '').lower()
+            is_text = mime_type.startswith('text/') or 'html' in mime_type or 'xml' in mime_type
+            
+            if is_text:
+                with open(filepath, 'w', encoding='utf-8') as f:
+                    f.write(response.text)
+            else:
+                with open(filepath, 'wb') as f:
+                    f.write(response.content)
             
             self.downloaded_count += 1
             logger.info(f"Saved {filepath} ({self.downloaded_count}/{self.max_downloads})")
@@ -107,17 +123,21 @@ class WebScraper:
         
         mime_type = response.headers.get('Content-Type')
         if mime_type:
-            extension = mimetypes.guess_extension(mime_type.split(';')[0].strip())
+            inferred_extension = mimetypes.guess_extension(mime_type.split(';')[0].strip())
         else:            
-            extension = '.html'
-        # Only append .html if no extension exists
+            inferred_extension = '.html'
+
+        current_ext = os.path.splitext(filename)[1]
         ext = os.path.splitext(filename)[1]
         # print ('--- filename:', filename)  # Debugging line
         # print ('--- mimetype:', mime_type)  # Debugging line
-        # print ('--- extension:', extension)  # Debugging line
-        # print ('--- ext:', ext)  # Debugging line
-        if not filename.endswith(extension):
-            filename = f"{filename}.html"
+        # print ('--- inferred_extension', inferred_extension)  # Debugging line
+        # print ('--- current_ext:', current_ext)  # Debugging line
+
+        # Only append .html if no extension exists
+        if not filename.endswith(inferred_extension):
+             filename = f"{filename}.html"
+
         # print ('--- returning filename:', filename)  # Debugging line
         return filename
         
