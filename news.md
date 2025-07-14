@@ -20,7 +20,7 @@ This allows us to seamlessly access LLMs running locally (using [ollama](https:/
 
 Also singinficantly simplified LLM configuration.
 
-**Support for other file types (pdf, docx)** ([#37](https://github.com/The-AI-Alliance/allycat/issues/37))
+**Expanded support for many file types (pdf, docx)** ([#37](https://github.com/The-AI-Alliance/allycat/issues/37))
 
 Before we just handled HTML files. Now we can download and process other popular file types - like PDF, DOCX ..etc.  We use [Docling](https://github.com/docling-project/docling) for processing files.
 
@@ -30,9 +30,9 @@ Before we just handled HTML files. Now we can download and process other popular
 UV will be the preferred package manager going forward.  We will still maintain `requirements.txt` to support other package managers.
 
 
-**Easier config settings**([#19](https://github.com/The-AI-Alliance/allycat/issues/19))
+**Better config management**([#19](https://github.com/The-AI-Alliance/allycat/issues/19))
 
-Lot of user configuration can be set using `.env` file.  This simplifies config management and allows for easier and faster experimentation.
+Lot of user configuration can be set using `.env` file.  This simplifies config management and allows for easier and faster experimentation without changing code.
 
 
 **Documentation update**
