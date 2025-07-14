@@ -16,8 +16,9 @@ logger.info (f"✅ Cleared  processed data directory :  {MY_CONFIG.PROCESSED_DAT
 converter = DocumentConverter(format_options={"preserve_links": True})
 
 input_path = Path(MY_CONFIG.CRAWL_DIR)
-input_files = list(input_path.glob('*.html')) + list(input_path.glob('*.htm')) + list(input_path.glob('*.pdf'))
-logger.info (f"Found {len(input_files)} files to convert")
+# input_files = list(input_path.glob('*.html')) + list(input_path.glob('*.htm')) + list(input_path.glob('*.pdf'))
+input_files = list(input_path.glob('*.*')) 
+logger.info (f"Found {len(input_files)} files to process in {input_path}")
 
 files_processed = 0
 errors = 0
