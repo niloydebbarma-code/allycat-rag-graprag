@@ -12,9 +12,9 @@
 
 AllyCat is purposefully simple so it can be used by developers to learn how RAG-based GenAI works. Yet it is powerful enough to use with your website, You may also extend it for your own purposes. 
 
-## ⭐ Stay up-to-date (and show us your support)...
+⭐ **Found this tool helpful? Give it a star on GitHub to support the project and help others discover it!**
 
-Star Allycat on GitHub to be notified of new features
+**🗞️ [Allycat news](news.md)** - releases and new features!
 
 ## How does it work? 
 AllyCat uses your choice of LLM and vector database to implement a chatbot written in Python using [RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) architecture.
