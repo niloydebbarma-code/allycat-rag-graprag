@@ -4,25 +4,33 @@ import logging
 from dotenv import load_dotenv
 import time
 import asyncio
-
-os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
-
-# Load environment variables from .env file
-load_dotenv()
+import re
+import logging
 
 # Import llama-index and related libraries
 from llama_index.core import VectorStoreIndex, StorageContext
 from llama_index.vector_stores.milvus import MilvusVectorStore
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core import Settings
-from llama_index.llms.replicate import Replicate
-from llama_index.llms.ollama import Ollama
+from llama_index.llms.litellm import LiteLLM
 from my_config import MY_CONFIG
 import query_utils
 
 # Global variables for LLM and index
 vector_index = None
 initialization_complete = False
+
+logging.basicConfig(level=logging.WARNING, 
+                    # format='%(asctime)s - %(levelname)s - %(message)s',
+                    format='%(asctime)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s',
+                    force=True)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+# Load environment variables from .env file
+load_dotenv()
 
 def initialize():
     """
@@ -34,7 +42,7 @@ def initialize():
     if initialization_complete:
         return
     
-    logging.info("Initializing LLM and vector database...")
+    logger.info("Initializing LLM and vector database...")
     
     # raise Exception ("init exception test") # debug
     
@@ -43,25 +51,13 @@ def initialize():
         Settings.embed_model = HuggingFaceEmbedding(
             model_name = MY_CONFIG.EMBEDDING_MODEL
         )
-        print("✅ Using embedding model: ", MY_CONFIG.EMBEDDING_MODEL)
-        
+        logger.info(f"✅ Using embedding model: {MY_CONFIG.EMBEDDING_MODEL}")
+
         # Setup LLM
-        if MY_CONFIG.LLM_RUN_ENV == 'replicate':
-            llm = Replicate(
-                model=MY_CONFIG.LLM_MODEL,
-                temperature=0.1
+        logger.info(f"✅ Using LLM model : {MY_CONFIG.LLM_MODEL}")
+        Settings.llm = LiteLLM(
+            model=MY_CONFIG.LLM_MODEL,
             )
-        elif MY_CONFIG.LLM_RUN_ENV == 'local_ollama':
-            llm = Ollama(
-                model= MY_CONFIG.LLM_MODEL,
-                request_timeout=30.0,
-                temperature=0.1
-            )
-        else:
-            raise ValueError("❌ Invalid LLM run environment. Please set it to 'replicate' or 'local_ollama'.")
-        print("✅ LLM run environment: ", MY_CONFIG.LLM_RUN_ENV)    
-        print("✅ Using LLM model : ", MY_CONFIG.LLM_MODEL)
-        Settings.llm = llm
         
         # Initialize Milvus vector store
         vector_store = MilvusVectorStore(
@@ -71,21 +67,43 @@ def initialize():
             overwrite=False  # so we load the index from db
         )
         storage_context = StorageContext.from_defaults(vector_store=vector_store)
-        print ("✅ Connected to Milvus instance: ", MY_CONFIG.DB_URI )
+        logger.info  (f"✅ Connected to Milvus instance: {MY_CONFIG.DB_URI}")
         
         vector_index = VectorStoreIndex.from_vector_store(
             vector_store=vector_store, storage_context=storage_context)
-        print ("✅ Loaded index from vector db:", MY_CONFIG.DB_URI )
+        logger.info  (f"✅ Loaded index from vector db: {MY_CONFIG.DB_URI}")
 
-        logging.info("Successfully initialized LLM and vector database")
-    
+        logger.info("Successfully initialized LLM and vector database")
+
         initialization_complete = True
     except Exception as e:
         initialization_complete = False
-        logging.error(f"Error initializing LLM and vector database: {str(e)}")
+        logger.error(f"Error initializing LLM and vector database: {str(e)}")
         raise (e)
         # return False
 ## -------------
+
+def extract_thinking_section(response_text):
+    """
+    Extract thinking section from LLM response if present.
+    
+    Args:
+        response_text (str): The full response from the LLM
+        
+    Returns:
+        tuple: (thinking_content, cleaned_response)
+            - thinking_content: Content within <think></think> tags or None if not found
+            - cleaned_response: Response with thinking section removed
+    """
+    thinking_pattern = r'<think>(.*?)</think>'
+    match = re.search(thinking_pattern, response_text, re.DOTALL)
+    
+    if match:
+        thinking_content = match.group(1).strip()
+        cleaned_response = re.sub(thinking_pattern, '', response_text, flags=re.DOTALL).strip()
+        return thinking_content, cleaned_response
+    else:
+        return None, response_text
 
 async def get_llm_response(message):
     """
@@ -107,7 +125,7 @@ async def get_llm_response(message):
     try:
         # Step 1: Query preprocessing
         async with cl.Step(name="Query Preprocessing", type="tool") as step:
-            logging.info("Start query preprocessing step...")
+            logger.info("Start query preprocessing step...")
             step.input = message
             
             # Create a query engine from the index
@@ -117,16 +135,24 @@ async def get_llm_response(message):
             original_message = message
             message = query_utils.tweak_query(message, MY_CONFIG.LLM_MODEL)
             
-            step.output = f"Original: {original_message}\nOptimized: {message}"
+            step.output = f"Optimized query: {message}"
+        ## --- end: Step 1 ---
         
+        # Query the index
+        logger.info("Calling LLM ...")
+        t1 = time.time()
+        response = query_engine.query(message)
+        t2 = time.time()
+        if response:
+            response_text = str(response).strip()
+        else:
+            response_text = "No response from LLM."
+        logger.info(f"LLM response received in {(t2 - t1):.2f} seconds:\n{response_text[:200]}")
+
         # Step 2: Vector search and retrieval
         async with cl.Step(name="Document Retrieval", type="retrieval") as step:
-            logging.info("Start vector search and retrieval step...")
             step.input = message
-            
-            # Query the index
-            response = query_engine.query(message)
-            
+
             # Show retrieved documents
             if hasattr(response, 'source_nodes') and response.source_nodes:
                 sources_output = []
@@ -138,19 +164,32 @@ async def get_llm_response(message):
             else:
                 step.output = "No relevant documents found."
         
-        # Step 3: LLM generation
-        async with cl.Step(name="Response Generation", type="llm") as step:
-            logging.info("Start LLM response generation step...")
+        
+        # Extract thinking section if present
+        thinking_content, cleaned_response = extract_thinking_section(response_text)
+        # print (f"------ Thinking Content:-----\n{thinking_content}\n------")  # Debug print
+        # print (f"------ Cleaned Response:-----\n{cleaned_response}\n------")  # Debug print
+        
+        # Step 3: Optional Thinking Process
+        if thinking_content:
+            async with cl.Step(name="💭 Thinking Process", type="run") as step:
+                step.input = ""
+                step.output = thinking_content
+                logger.info(f"Thinking:\n{thinking_content[:200]}...")
+
+        # Step 4: LLM Answer
+        async with cl.Step(name="Response", type="llm") as step:
             step.input = f"Query: {message}\nContext: Retrieved from vector database"
             
-            if response:
-                response_text = str(response).strip()
-                step.output = response_text[:500] + "..." if len(response_text) > 500 else response_text
+            if cleaned_response:
+                step.output = cleaned_response
+                logger.info(f"Response:\n{cleaned_response[:200]}...")
             else:
-                step.output = "No response generated."
-        
+                step.output = "No response from LLM."
+                logger.info(f"Response:\nNo response from LLM.")
+
     except Exception as e:
-        logging.error(f"Error getting LLM response: {str(e)}")
+        logger.error(f"Error getting LLM response: {str(e)}")
         response_text =  f"Sorry, I encountered an error while processing your request:\n{str(e)}"
         
     end_time = time.time()
@@ -191,7 +230,7 @@ async def start():
     """Initialize the chat session"""
     # Store initialization state in user session
     cl.user_session.set("chat_started", True)
-    logging.info("User chat session started")
+    logger.info("User chat session started")
     init_error = None
     
     try:
@@ -217,10 +256,12 @@ async def main(message: cl.Message):
     
     # Get response from LLM with RAG steps shown FIRST
     response_text, elapsed_time = await get_llm_response(user_message)
-    logging.info(f"LLM Response: {response_text[:100]}...")  # Log first 100 chars
+    # logger.info(f"LLM Response:\n{response_text[:200]}...")  # Log first 200 chars
+
+    thinking_content, cleaned_response = extract_thinking_section(response_text)
     
     # Add timing stat to response
-    full_response = response_text + f"\n\n⏱️ *Total time: {elapsed_time:.1f} seconds*"
+    full_response = cleaned_response + f"\n\n⏱️ *Total time: {elapsed_time:.1f} seconds*"
     
     # THEN create a new message for streaming
     msg = cl.Message(content="")
@@ -238,10 +279,5 @@ async def main(message: cl.Message):
 
 ## -------
 if __name__ == '__main__':
-    # Configure logging
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    )
-    logging.info("App starting up...")
+    logger.info("App starting up...")
     

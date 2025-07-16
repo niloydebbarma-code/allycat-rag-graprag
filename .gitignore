@@ -14,3 +14,5 @@ tmp
 *.speed
 
 __pycache__
+
+chainlit.md

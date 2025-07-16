@@ -107,7 +107,7 @@ def main():
     try:
         files_processed, errors, file_type_stats = process_files(MY_CONFIG.CRAWL_DIR, MY_CONFIG.PROCESSED_DATA_DIR)
         duplicates_removed = cleanup_duplicate_markdown_files(MY_CONFIG.PROCESSED_DATA_DIR)
-        # logger.info(f"✅ Final summary: {files_processed} files processed, {errors} errors, {duplicates_removed} duplicates removed")
+        logger.info(f"✅ Final summary: {files_processed} files processed, {errors} errors, {duplicates_removed} duplicates removed")
         logger.info("✅ File processing pipeline completed successfully")
         return 0
     except Exception as e:
