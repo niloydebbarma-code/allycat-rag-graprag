@@ -56,7 +56,7 @@ def process_files(crawl_dir, processed_dir):
     """
 
     input_path = Path(crawl_dir)
-    input_files = list(input_path.glob('*.*')) 
+    input_files = list(input_path.glob('*')) 
     logger.info (f"Found {len(input_files)} files to process in {input_path}")
 
     shutil.rmtree(processed_dir, ignore_errors=True)

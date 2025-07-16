@@ -205,7 +205,6 @@ async def get_llm_response(message):
 async def set_starters():
     starters = []
     for prompt in MY_CONFIG.STARTER_PROMPTS:
-        print (f"Adding starter prompt: {prompt.strip()}")
         starters.append(
             cl.Starter(
                 label=prompt.strip(),
