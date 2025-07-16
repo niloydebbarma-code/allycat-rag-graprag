@@ -78,7 +78,7 @@ default_expand_message="true"
 
 
 # Description of the assistant. This is used for HTML tags.
-descriptioin="Chat with AI Alliance website using LLMs and RAG"
+description="Chat with the website using LLMs and RAG"
 
 # Chain of Thought (CoT) display mode. Can be "hidden", "tool_call" or "full".
 cot = "full"
@@ -114,11 +114,13 @@ custom_meta_image_url = "https://chainlit-cloud.s3.eu-west-3.amazonaws.com/logo/
 # custom_build = "./public/build"
 
 # Specify optional one or more custom links in the header.
+
 [[UI.header_links]]
-    name = "AI Alliance"
-    display_name = "AI Alliance"
-    icon_url = "https://blog.seas.upenn.edu/wp-content/uploads/2024/02/AI-Alliance-social-tile-LinkedIn-e1707322248331.png"
-    url = "https://thealliance.ai/"
+    name = "Allycat"
+    display_name = "Allycat"
+    icon_url = "https://raw.githubusercontent.com/The-AI-Alliance/allycat/main/assets/allycat.png"
+    url = "https://github.com/The-AI-Alliance/allycat/"
+
 
 [meta]
 generated_by = "2.5.5"
