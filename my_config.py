@@ -52,3 +52,7 @@ MY_CONFIG.COLLECTION_NAME = 'pages'
 
 MY_CONFIG.LLM_MODEL = os.getenv("LLM_MODEL", 'ollama/gemma3:1b')
 
+## --- UI settings ---
+MY_CONFIG.STARTER_PROMPTS_STR = os.getenv("UI_STARTER_PROMPTS", 'What is this website?  |  What are upcoming events?  | Who are some of the partners?')
+MY_CONFIG.STARTER_PROMPTS = MY_CONFIG.STARTER_PROMPTS_STR.split("|") if MY_CONFIG.STARTER_PROMPTS_STR else []
+

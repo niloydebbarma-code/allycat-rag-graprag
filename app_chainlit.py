@@ -203,27 +203,17 @@ async def get_llm_response(message):
 
 @cl.set_starters
 async def set_starters():
-    return [
-        cl.Starter(
-            label="What is the AI Alliance?",
-            message="What is the AI Alliance?",
-            ),
-        cl.Starter(
-            label="What are the main focus areas of AI Alliance?",
-            message="What are the main focus areas of AI Alliance?",
-            ),
-        cl.Starter(
-            label="What are some AI Alliance projects?",
-            message="What are some AI Alliance projects?",
-            ),
-        cl.Starter(
-            label="What are some upcoming AI Alliance events?",
-            message="What are some upcoming AI Alliance events?",
-            ),
-        cl.Starter(
-            label="How do I join the AI Alliance?",
-            message="How do I join the AI Alliance?",
-            )]
+    starters = []
+    for prompt in MY_CONFIG.STARTER_PROMPTS:
+        print (f"Adding starter prompt: {prompt.strip()}")
+        starters.append(
+            cl.Starter(
+                label=prompt.strip(),
+                message=prompt.strip(),
+            )
+        )
+    return starters
+## --- end: def set_starters(): ---
 
 @cl.on_chat_start
 async def start():
