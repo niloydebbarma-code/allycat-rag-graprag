@@ -1,13 +1,7 @@
 from flask import Flask, g, render_template, request, jsonify
 import os
 import logging
-from dotenv import load_dotenv
 import time
-
-os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
-
-# Load environment variables from .env file
-load_dotenv()
 
 # Import llama-index and related libraries
 from llama_index.core import VectorStoreIndex, StorageContext
@@ -17,6 +11,11 @@ from llama_index.core import Settings
 from llama_index.llms.litellm import LiteLLM
 from my_config import MY_CONFIG
 import query_utils
+
+
+os.environ['HF_ENDPOINT'] = MY_CONFIG.HF_ENDPOINT
+
+
 
 app = Flask(__name__)
 
@@ -54,19 +53,19 @@ def initialize():
         print("✅ Using LLM model : ", MY_CONFIG.LLM_MODEL)
         Settings.llm = llm
         
-        # Initialize Milvus vector store
+        # Initialize Milvus vector store for Vector RAG only
         vector_store = MilvusVectorStore(
-            uri = MY_CONFIG.DB_URI ,
+            uri = MY_CONFIG.MILVUS_URI_VECTOR ,  # Use dedicated Vector-only database
             dim = MY_CONFIG.EMBEDDING_LENGTH , 
             collection_name = MY_CONFIG.COLLECTION_NAME,
             overwrite=False  # so we load the index from db
         )
         storage_context = StorageContext.from_defaults(vector_store=vector_store)
-        print ("✅ Connected to Milvus instance: ", MY_CONFIG.DB_URI )
+        print ("✅ Connected to Vector-only Milvus instance: ", MY_CONFIG.MILVUS_URI_VECTOR )
         
         vector_index = VectorStoreIndex.from_vector_store(
             vector_store=vector_store, storage_context=storage_context)
-        print ("✅ Loaded index from vector db:", MY_CONFIG.DB_URI )
+        print ("✅ Loaded Vector-only index from:", MY_CONFIG.MILVUS_URI_VECTOR )
 
         logging.info("Successfully initialized LLM and vector database")
     
@@ -160,7 +159,8 @@ if __name__ == '__main__':
         # g.init_error = str(e)
         
     
-    # app.run(debug=False)
-    PORT = int(os.environ.get("PORT", 8080))
+    # Vector RAG Flask App - Port 8080
+    PORT = int(os.environ.get("PORT", 8080))  # Vector RAG only
+    print(f"🚀 Vector RAG Flask app starting on port {PORT}")
     app.run(host="0.0.0.0", debug=False, port=PORT)
 ## -- end main ----

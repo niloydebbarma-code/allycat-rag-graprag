@@ -2,6 +2,17 @@ docling
 
 nest_asyncio
 
+# Universal Content Analysis
+unstructured[all-docs]
+# groq
+# spacy
+torch
+transformers
+
+# Advanced JSON parsing libraries
+orjson>=3.8.0          # Ultra-fast JSON parser with better error handling
+json-repair>=0.7.0     # JSON repair and recovery
+
 # Milvus
 pymilvus
 milvus-lite
@@ -23,7 +34,7 @@ flask
 ## utils
 humanfriendly
 pandas
-mimetypes-magic
+# mimetypes-magic
 tqdm
 ipykernel
 
@@ -33,3 +44,10 @@ chainlit
 
 # Environment variables
 python-dotenv
+
+
+# --- Graph Related Requirements ---
+neo4j            # Neo4j graph database driver
+google-generativeai  # Google Gemini API for graph entity extraction
+openai>=1.0.0    # OpenAI client for Cerebras API integration
+fastmcp          # Fast MCP utility for graph data processing

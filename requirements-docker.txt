@@ -12,6 +12,10 @@ nest_asyncio
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch==2.6.0+cpu
 
+# Advanced JSON parsing libraries
+orjson>=3.8.0          # Ultra-fast JSON parser with better error handling
+json-repair>=0.7.0     # JSON repair and recovery
+
 # Milvus
 pymilvus==2.5.5
 milvus-lite==2.4.11
