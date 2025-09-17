@@ -27,11 +27,35 @@ def run_query(query: str):
     start_time = time.time()
     query = query_utils.tweak_query(query, MY_CONFIG.LLM_MODEL)
     logger.info (f"\nProcessing Query:\n{query}")
-    res = query_engine.query(query)
+    
+    # Get initial vector response
+    vector_response = query_engine.query(query)
+    vector_text = str(vector_response).strip()
+    
+    # Structured prompt 
+    structured_prompt = f"""Please provide a comprehensive, well-structured answer using the provided document information.
+
+Question: {query}
+
+Document Information:
+{vector_text}
+
+Instructions:
+1. Provide accurate, factual information based on the documents
+2. Structure your response clearly with proper formatting
+3. Be comprehensive yet concise
+4. Highlight key relationships and important details when relevant
+5. Use bullet points or sections when appropriate for clarity
+
+Please provide your answer:"""
+    
+    # Use structured prompt for final synthesis
+    res = query_engine.query(structured_prompt)
+    
     end_time = time.time()
     logger.info ( "-------"
                  + f"\nResponse:\n{res}" 
-                 + f"\n\nTime taken: {(end_time - start_time):.1f} secs"
+                 + f"\n\n⏱️ Total time: {(end_time - start_time):.1f} seconds"
                  + f"\n\nResponse Metadata:\n{json.dumps(res.metadata, indent=2)}" 
                 #  + f"\nSource Nodes: {[node.node_id for node in res.source_nodes]}"
                  )

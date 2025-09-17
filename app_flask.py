@@ -102,8 +102,8 @@ def chat():
 
 def get_llm_response(message):
     """
-    Process the user message and get a response from the LLM.
-    Uses the initialized index for semantic search and LLM for response generation.
+    Process the user message and get a response from the LLM using Vector RAG
+    with structured prompting
     """
     global vector_index, initialization_complete
     
@@ -119,12 +119,35 @@ def get_llm_response(message):
         # Create a query engine from the index
         query_engine = vector_index.as_query_engine()
         
-        # Query the index
+        # Apply query optimization
         message = query_utils.tweak_query(message, MY_CONFIG.LLM_MODEL)
-        response = query_engine.query(message)
         
-        if response:
-            response_text = str(response).strip()
+        # Get initial vector response
+        vector_response = query_engine.query(message)
+        vector_text = str(vector_response).strip()
+        
+        # Structured prompt
+        structured_prompt = f"""Please provide a comprehensive, well-structured answer using the provided document information.
+
+Question: {message}
+
+Document Information:
+{vector_text}
+
+Instructions:
+1. Provide accurate, factual information based on the documents
+2. Structure your response clearly with proper formatting
+3. Be comprehensive yet concise
+4. Highlight key relationships and important details when relevant
+5. Use bullet points or sections when appropriate for clarity
+
+Please provide your answer:"""
+        
+        # Use structured prompt for final synthesis
+        final_response = query_engine.query(structured_prompt)
+        
+        if final_response:
+            response_text = str(final_response).strip()
         
     except Exception as e:
         logging.error(f"Error getting LLM response: {str(e)}")
@@ -133,7 +156,7 @@ def get_llm_response(message):
     end_time = time.time()
     
     # add timing stat
-    response_text += f"\n(time taken: {(end_time - start_time):.1f} secs)"
+    response_text += f"\n⏱️ *Total time: {(end_time - start_time):.1f} seconds*"
     return response_text
     
 ## --- end: def get_llm_response():
